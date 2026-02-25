@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta — Signature Garage | Latitud Nomade</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sg-red:#AC1D28;--sg-red-dark:#8B1720;--sg-red-light:#D4343F;
+  --sg-black:#111;--sg-dark:#1a1a1a;--sg-gray:#2a2a2a;
+  --sg-light:#f5f5f5;--sg-white:#fff;--sg-muted:#888;
+  --sg-green:#22c55e;--sg-yellow:#eab308;--sg-red-sem:#ef4444;
+  --sg-blue:#3b82f6;--sg-purple:#a855f7;
+  --radius:12px;--transition:0.3s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--sg-black);color:var(--sg-white);line-height:1.6;overflow-x:hidden}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--sg-dark)}
+::-webkit-scrollbar-thumb{background:var(--sg-red);border-radius:4px}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(17,17,17,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(172,29,40,.3);padding:0 2rem;transition:var(--transition)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-size:1.1rem;font-weight:700;letter-spacing:1px;color:var(--sg-white)}
+.nav-logo span{color:var(--sg-red)}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:var(--sg-muted);text-decoration:none;font-size:.85rem;font-weight:500;transition:var(--transition);position:relative}
+.nav-links a:hover,.nav-links a.active{color:var(--sg-white)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--sg-red);transition:var(--transition)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.nav-hamburger span{width:24px;height:2px;background:var(--sg-white);transition:var(--transition)}
+@media(max-width:768px){
+  .nav-links{position:fixed;top:64px;left:0;right:0;background:rgba(17,17,17,.98);flex-direction:column;padding:2rem;gap:1.5rem;transform:translateY(-120%);transition:var(--transition);border-bottom:1px solid rgba(172,29,40,.3)}
+  .nav-links.open{transform:translateY(0)}
+  .nav-hamburger{display:flex}
+}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(172,29,40,.15) 0%,transparent 70%)}
+.hero-badge{display:inline-block;padding:.4rem 1.2rem;border:1px solid var(--sg-red);border-radius:50px;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--sg-red);margin-bottom:2rem;animation:fadeInUp .8s ease}
+.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:1.5rem;animation:fadeInUp .8s ease .1s both}
+.hero h1 span{background:linear-gradient(135deg,var(--sg-red),var(--sg-red-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(1rem,2vw,1.25rem);color:var(--sg-muted);max-width:700px;margin:0 auto 3rem;animation:fadeInUp .8s ease .2s both}
+.hero-meta{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;animation:fadeInUp .8s ease .3s both}
+.hero-meta-item{text-align:center}
+.hero-meta-item .label{font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--sg-muted);margin-bottom:.25rem}
+.hero-meta-item .value{font-size:.95rem;font-weight:600}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);animation:bounce 2s infinite}
+.hero-scroll svg{width:24px;height:24px;stroke:var(--sg-muted)}
+
+/* SECTIONS */
+section{padding:5rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.section-label{font-size:.7rem;text-transform:uppercase;letter-spacing:3px;color:var(--sg-red);font-weight:600;margin-bottom:.5rem}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-bottom:1rem;line-height:1.2}
+.section-desc{color:var(--sg-muted);font-size:1.05rem;max-width:650px;margin-bottom:3rem}
+
+/* PAIN POINTS */
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.pain-card{background:var(--sg-dark);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1.8rem;position:relative;overflow:hidden;transition:var(--transition);cursor:default}
+.pain-card:hover{border-color:var(--sg-red);transform:translateY(-4px)}
+.pain-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--sg-red-sem)}
+.pain-icon{width:40px;height:40px;border-radius:10px;background:rgba(239,68,68,.1);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.2rem}
+.pain-card h3{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.pain-card p{font-size:.88rem;color:var(--sg-muted);line-height:1.5}
+.pain-card .pain-example{margin-top:.75rem;padding:.6rem .8rem;background:rgba(239,68,68,.06);border-radius:8px;font-size:.8rem;color:var(--sg-red-light);font-style:italic}
+
+/* SOLUTION */
+.solution-banner{background:linear-gradient(135deg,rgba(172,29,40,.1),rgba(172,29,40,.05));border:1px solid rgba(172,29,40,.2);border-radius:var(--radius);padding:2.5rem;text-align:center;margin-bottom:4rem}
+.solution-banner h3{font-size:1.5rem;font-weight:700;margin-bottom:.5rem}
+.solution-banner p{color:var(--sg-muted);max-width:600px;margin:0 auto}
+
+/* MODULES */
+.modules-categories{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.cat-btn{padding:.5rem 1.2rem;border:1px solid rgba(255,255,255,.1);border-radius:50px;background:transparent;color:var(--sg-muted);font-size:.8rem;cursor:pointer;transition:var(--transition);font-family:inherit}
+.cat-btn:hover,.cat-btn.active{background:var(--sg-red);border-color:var(--sg-red);color:var(--sg-white)}
+.module-list{display:flex;flex-direction:column;gap:1rem}
+.module-card{background:var(--sg-dark);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);overflow:hidden;transition:var(--transition)}
+.module-card[data-category]{display:block}
+.module-card.hidden{display:none}
+.module-header{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.5rem;cursor:pointer;transition:var(--transition);user-select:none}
+.module-header:hover{background:rgba(255,255,255,.02)}
+.module-num{width:36px;height:36px;border-radius:8px;background:rgba(172,29,40,.15);color:var(--sg-red);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0}
+.module-header h3{flex:1;font-size:1rem;font-weight:600}
+.module-tag{padding:.2rem .6rem;border-radius:50px;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.tag-core{background:rgba(172,29,40,.15);color:var(--sg-red-light)}
+.tag-operations{background:rgba(59,130,246,.15);color:var(--sg-blue)}
+.tag-admin{background:rgba(168,85,247,.15);color:var(--sg-purple)}
+.tag-client{background:rgba(34,197,94,.15);color:var(--sg-green)}
+.module-chevron{width:20px;height:20px;transition:var(--transition);color:var(--sg-muted)}
+.module-card.open .module-chevron{transform:rotate(180deg);color:var(--sg-red)}
+.module-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1)}
+.module-card.open .module-body{max-height:2000px}
+.module-content{padding:0 1.5rem 1.5rem 4rem;border-top:1px solid rgba(255,255,255,.04)}
+.module-content p{color:var(--sg-muted);font-size:.9rem;margin-bottom:1rem;padding-top:1rem}
+.module-content ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.module-content li{font-size:.88rem;color:rgba(255,255,255,.75);padding-left:1.2rem;position:relative}
+.module-content li::before{content:'';position:absolute;left:0;top:.55rem;width:6px;height:6px;border-radius:50%;background:var(--sg-red)}
+
+/* FLOW */
+.flow-container{position:relative}
+.flow-step{display:flex;gap:1.5rem;margin-bottom:0;position:relative;padding-bottom:2rem}
+.flow-step:last-child{padding-bottom:0}
+.flow-step:last-child .flow-line{display:none}
+.flow-marker{position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:center}
+.flow-dot{width:40px;height:40px;border-radius:50%;background:var(--sg-red);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;z-index:1;position:relative}
+.flow-line{position:absolute;top:40px;left:50%;width:2px;bottom:0;background:rgba(172,29,40,.3);transform:translateX(-50%)}
+.flow-content{flex:1;padding-bottom:.5rem}
+.flow-content h3{font-size:1.05rem;font-weight:700;margin-bottom:.25rem}
+.flow-content .flow-who{font-size:.75rem;color:var(--sg-red);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem}
+.flow-content p{font-size:.88rem;color:var(--sg-muted);line-height:1.6}
+.flow-content .flow-detail{margin-top:.75rem;background:rgba(255,255,255,.03);border-radius:8px;padding:1rem;font-size:.82rem;color:rgba(255,255,255,.6)}
+.flow-content .flow-detail code{background:rgba(172,29,40,.15);color:var(--sg-red-light);padding:.15rem .4rem;border-radius:4px;font-size:.78rem}
+
+/* PHASES */
+.phases-grid{display:grid;gap:1.5rem}
+.phase-card{background:var(--sg-dark);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1.5rem;position:relative;overflow:hidden;transition:var(--transition)}
+.phase-card:hover{border-color:rgba(172,29,40,.3)}
+.phase-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.phase-number{font-size:2rem;font-weight:800;color:var(--sg-red);line-height:1;opacity:.7}
+.phase-info h3{font-size:1.05rem;font-weight:700}
+.phase-info .phase-time{font-size:.78rem;color:var(--sg-muted)}
+.phase-items{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+.phase-items li{font-size:.85rem;color:rgba(255,255,255,.7);padding-left:1.5rem;position:relative}
+.phase-items li::before{content:'';position:absolute;left:0;top:.35rem;width:14px;height:14px;border:2px solid rgba(255,255,255,.15);border-radius:3px}
+.phase-items li.done::before{background:var(--sg-green);border-color:var(--sg-green)}
+.phase-items li.done::after{content:'';position:absolute;left:3px;top:5px;width:8px;height:5px;border-left:2px solid var(--sg-white);border-bottom:2px solid var(--sg-white);transform:rotate(-45deg)}
+.phase-bar{margin-top:1rem;height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.phase-bar-fill{height:100%;background:linear-gradient(90deg,var(--sg-red),var(--sg-red-light));border-radius:2px;transition:width 1s ease}
+
+/* TECH */
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+.tech-card{background:var(--sg-dark);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1.2rem}
+.tech-card h4{font-size:.9rem;font-weight:700;margin-bottom:.75rem;color:var(--sg-red)}
+.tech-item{display:flex;justify-content:space-between;padding:.35rem 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:.82rem}
+.tech-item:last-child{border:none}
+.tech-item .tech-name{color:rgba(255,255,255,.9);font-weight:500}
+.tech-item .tech-desc{color:var(--sg-muted);font-size:.78rem}
+
+/* ROLES */
+.roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.role-card{background:var(--sg-dark);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1.5rem;transition:var(--transition)}
+.role-card:hover{border-color:rgba(172,29,40,.3)}
+.role-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem}
+.role-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.5rem}
+.role-card p{font-size:.85rem;color:var(--sg-muted);margin-bottom:1rem}
+.role-perms{list-style:none}
+.role-perms li{font-size:.82rem;padding:.25rem 0;padding-left:1.2rem;position:relative;color:rgba(255,255,255,.7)}
+.role-perms li::before{content:'';position:absolute;left:0;top:.5rem;width:6px;height:6px;border-radius:50%;background:var(--sg-green)}
+.role-perms li.denied::before{background:var(--sg-red-sem)}
+
+/* CTA */
+.cta{text-align:center;padding:5rem 2rem;position:relative}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(172,29,40,.1) 0%,transparent 70%)}
+.cta h2{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin-bottom:1rem;position:relative}
+.cta p{color:var(--sg-muted);margin-bottom:2rem;position:relative;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+.btn{padding:.8rem 2rem;border-radius:50px;font-size:.9rem;font-weight:600;text-decoration:none;transition:var(--transition);cursor:pointer;border:none;font-family:inherit;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary{background:var(--sg-red);color:var(--sg-white)}
+.btn-primary:hover{background:var(--sg-red-dark);transform:translateY(-2px);box-shadow:0 8px 30px rgba(172,29,40,.3)}
+.btn-secondary{background:transparent;color:var(--sg-white);border:1px solid rgba(255,255,255,.2)}
+.btn-secondary:hover{border-color:var(--sg-white);transform:translateY(-2px)}
+
+/* FOOTER */
+.footer{padding:2rem;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+.footer p{font-size:.78rem;color:var(--sg-muted)}
+.footer a{color:var(--sg-red);text-decoration:none}
+
+/* ANIMATIONS */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-10px)}60%{transform:translateX(-50%) translateY(-5px)}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  section{padding:3rem 1.2rem}
+  .module-content{padding:0 1rem 1rem 1rem}
+  .flow-step{gap:1rem}
+  .hero{padding:5rem 1.5rem 3rem}
+  .hero-meta{gap:1rem}
+  .pain-grid{grid-template-columns:1fr}
+}
+
+/* PRINT */
+@media print{
+  .nav,.hero-scroll,.nav-hamburger{display:none!important}
+  body{background:#fff;color:#111}
+  .module-body{max-height:none!important}
+  .module-card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo"><span>LATITUD</span> NOMADE</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#problema">Problema</a></li>
+      <li><a href="#modulos">Modulos</a></li>
+      <li><a href="#flujo">Flujo</a></li>
+      <li><a href="#roles">Roles</a></li>
+      <li><a href="#fases">Fases</a></li>
+      <li><a href="#tech">Tech</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div>
+    <div class="hero-badge">Propuesta Comercial</div>
+    <h1>Sistema de Gestion<br>para <span>Signature Garage</span></h1>
+    <p class="hero-sub">Aplicacion web progresiva (PWA) para la gestion integral del taller, guarderia de vehiculos y base de clientes. Una sola fuente de verdad para todo el negocio.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="label">Cliente</div><div class="value">Signature Garage</div></div>
+      <div class="hero-meta-item"><div class="label">Ubicacion</div><div class="value">Punta del Este, UY</div></div>
+      <div class="hero-meta-item"><div class="label">Version</div><div class="value">1.0</div></div>
+      <div class="hero-meta-item"><div class="label">Fecha</div><div class="value">Febrero 2026</div></div>
+      <div class="hero-meta-item"><div class="label">Desarrollador</div><div class="value">Latitud Nomade</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg></div>
+</section>
+
+<!-- PAIN POINTS -->
+<section id="problema">
+  <div class="container reveal">
+    <div class="section-label">El Problema</div>
+    <div class="section-title">Dolores actuales del negocio</div>
+    <div class="section-desc">Hoy la operacion se maneja con papel, WhatsApp y memoria. Estos son los puntos criticos que la aplicacion resuelve de raiz.</div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">&#9888;</div>
+        <h3>Se escapan tareas sin hacer</h3>
+        <p>Un auto viene por 14 items, se hacen 13, se entrega incompleto. No hay checklist ni validacion de cierre.</p>
+        <div class="pain-example">Ejemplo real: se olvidaron un corte de bateria &mdash; USD 25-30 perdidos.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">&#128176;</div>
+        <h3>Se escapan costos sin cobrar</h3>
+        <p>Insumos pequenos (aceite, tornillos, cortes) que el mecanico pone y nadie registra. Se pierden sistematicamente.</p>
+        <div class="pain-example">Los materiales menores son lo que mas se escapa hoy.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">&#128065;</div>
+        <h3>Cero visibilidad del taller</h3>
+        <p>No se sabe que tiene pendiente cada auto, en que etapa esta, que repuestos faltan. Todo esta en la cabeza de alguien.</p>
+        <div class="pain-example">Imposible priorizar si no se ve el panorama completo.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">&#128663;</div>
+        <h3>Guarderia sin control</h3>
+        <p>~40 autos, pagos mensuales, servicios periodicos, todo gestionado de memoria. Imposible escalar con el local nuevo.</p>
+        <div class="pain-example">En PDE los autos se usan poco: el servicio es por tiempo, no km.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">&#128196;</div>
+        <h3>Sin historial de vehiculos</h3>
+        <p>Cuando un auto vuelve, no hay registro de que se le hizo antes. Cada visita arranca de cero.</p>
+        <div class="pain-example">Se repiten diagnosticos y se pierde contexto valioso.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">&#128181;</div>
+        <h3>Cobros que se pierden</h3>
+        <p>No hay forma automatizada de saber quien pago y quien no. Los pendientes de cobro se diluyen.</p>
+        <div class="pain-example">Sin vista consolidada, la plata queda en el aire.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION BANNER -->
+<section style="padding-top:0">
+  <div class="container reveal">
+    <div class="solution-banner">
+      <h3>La solucion: una sola fuente de verdad</h3>
+      <p>Si no esta en la app, no paso. El sistema fuerza registros, valida checklists y automatiza notificaciones. Nada queda en WhatsApp, papelitos ni planillas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section id="modulos">
+  <div class="container reveal">
+    <div class="section-label">Alcance</div>
+    <div class="section-title">Modulos de la aplicacion</div>
+    <div class="section-desc">18 modulos agrupados por categoria. Hace click en cada uno para ver el detalle de funcionalidades.</div>
+
+    <div class="modules-categories">
+      <button class="cat-btn active" data-filter="all">Todos</button>
+      <button class="cat-btn" data-filter="core">Nucleo</button>
+      <button class="cat-btn" data-filter="operations">Operaciones</button>
+      <button class="cat-btn" data-filter="admin">Admin &amp; Finanzas</button>
+      <button class="cat-btn" data-filter="client">Cliente &amp; CRM</button>
+    </div>
+
+    <div class="module-list">
+
+      <!-- CORE MODULES -->
+      <div class="module-card" data-category="core">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">01</div>
+          <h3>Vehiculos</h3>
+          <span class="module-tag tag-core">Nucleo</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Gestion centralizada de todos los vehiculos que pasan por SG. El vehiculo es la entidad raiz: la deuda es con el vehiculo, no con el cliente.</p>
+          <ul>
+            <li>CRUD completo con VIN como identificador unico</li>
+            <li>Categorias: Guarderia, Venta, Externo</li>
+            <li>Asociacion con cliente propietario</li>
+            <li>Historial completo de trabajos/ordenes</li>
+            <li>Galeria de fotos del vehiculo</li>
+            <li>Generacion de codigo QR con historial</li>
+            <li>Filtrado por categoria, estado y ubicacion</li>
+            <li>Registro de kilometraje actualizable</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="core">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">02</div>
+          <h3>Ordenes de Trabajo</h3>
+          <span class="module-tag tag-core">Nucleo</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Corazon de la aplicacion. Gestiona el ciclo de vida completo de cada trabajo mecanico, desde la deteccion de la necesidad hasta el cobro final.</p>
+          <ul>
+            <li>Flujo completo: Creado &rarr; Agendado &rarr; Ingreso &rarr; En Proceso &rarr; Cierre Taller &rarr; Cuenta Pasada &rarr; Cobrado</li>
+            <li>Motivo obligatorio como detonante de cada orden</li>
+            <li>Checklist de tareas desglosado desde el motivo</li>
+            <li>Prioridad tipo semaforo: Rojo (urgente), Amarillo (importante), Verde (puede esperar)</li>
+            <li>Items originales inmutables &mdash; solo se agregan nuevos</li>
+            <li>Validacion obligatoria al cierre: todos los items marcados o con motivo</li>
+            <li>Bloqueo automatico al cerrar &mdash; solo admin reabre</li>
+            <li>Generacion automatica de nuevo trabajo si queda pendiente por repuesto o reagenda</li>
+            <li>Horas taller separadas de horas facturadas</li>
+            <li>El mecanico nunca ve montos ni costos</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="core">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">03</div>
+          <h3>Inspeccion de Ingreso</h3>
+          <span class="module-tag tag-core">Nucleo</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Registro del estado del vehiculo al llegar. Funciona como paraguas legal contra reclamos futuros.</p>
+          <ul>
+            <li>Fotos obligatorias: frente, costados, trasera, interior, detalles de roturas</li>
+            <li>Adjuntar PDF del scanner electronico (OBD)</li>
+            <li>Opcion de anular inspeccion visual o scanner con motivo obligatorio</li>
+            <li>Todo registrado con fecha y usuario</li>
+            <li>Pasa automaticamente a "En Proceso" al completar</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="core">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">04</div>
+          <h3>Ubicaciones</h3>
+          <span class="module-tag tag-core">Nucleo</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Saber donde esta cada vehiculo en todo momento.</p>
+          <ul>
+            <li>Lista administrable: taller propio, proveedor/tercero, casa del cliente</li>
+            <li>Asociable a proveedor</li>
+            <li>Historial de movimientos por vehiculo con fecha</li>
+            <li>Cambio de ubicacion disponible en todo momento</li>
+            <li>Filtros: que autos tengo aca, que autos estan afuera</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <!-- OPERATIONS -->
+      <div class="module-card" data-category="operations">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">05</div>
+          <h3>Diagnostico Mecanico</h3>
+          <span class="module-tag tag-operations">Operaciones</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Como ir al medico: el auto viene por un ruido y le encuentran pastillas gastadas, amortiguadores y un cable roto. El mecanico registra hallazgos a medida que trabaja.</p>
+          <ul>
+            <li>Campo extenso para cada diagnostico</li>
+            <li>Multiples diagnosticos por trabajo</li>
+            <li>Fecha y usuario automaticos</li>
+            <li>Boton "Enviar diagnostico" &mdash; el mecanico decide cuando notifica</li>
+            <li>Historial visible de diagnosticos anteriores</li>
+            <li>Opcion de excepcion con justificacion</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="operations">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">06</div>
+          <h3>Solicitud de Pedidos</h3>
+          <span class="module-tag tag-operations">Operaciones</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Mecanismo formal para que el mecanico pida piezas. Sin costo &mdash; puramente descriptivo.</p>
+          <ul>
+            <li>Descripcion de pieza (no codigo)</li>
+            <li>Solicitud en bulk (multiples piezas a la vez)</li>
+            <li>Notificacion automatica a administracion</li>
+            <li>Historial de todo lo pedido por trabajo</li>
+            <li>Pedido asociado a la orden, gestionado en modulo de repuestos</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="operations">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">07</div>
+          <h3>Repuestos</h3>
+          <span class="module-tag tag-operations">Operaciones</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Seguimiento pieza por pieza, desde la solicitud hasta la instalacion.</p>
+          <ul>
+            <li>Flujo: Solicitado &rarr; Cotizado &rarr; Encargado &rarr; En Viaje &rarr; Recibido &rarr; Entregado &rarr; Instalado</li>
+            <li>Tipos: importado por SG vs. compra de plaza</li>
+            <li>Costos con IVA (solo admin)</li>
+            <li>Vista global filtrable por estado, trabajo, vehiculo</li>
+            <li>Si el trabajo se cierra con repuesto pendiente &rarr; migra al nuevo trabajo automatico</li>
+            <li>Reportes de tiempos de demora y gasto por proveedor</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="operations">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">08</div>
+          <h3>Carga de Horas</h3>
+          <span class="module-tag tag-operations">Operaciones</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Registro del tiempo de cada mecanico por tarea. Base decimal (no minutos).</p>
+          <ul>
+            <li>Horas en base 10: 0.1, 0.5, 2.0, etc.</li>
+            <li>Tarea descriptiva obligatoria por entrada</li>
+            <li>Operario seleccionable de lista administrable</li>
+            <li>Total acumulado visible en todo momento</li>
+            <li>Cada entrada queda con su detalle individual</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="operations">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">09</div>
+          <h3>Insumos / Pequenos Materiales</h3>
+          <span class="module-tag tag-operations">Operaciones</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Registro de materiales menores que se usan y tienen costo. Lo que mas se escapa hoy.</p>
+          <ul>
+            <li>Descripcion libre: corte de bateria, aceite, tornillo, liquido</li>
+            <li>Costo solo visible para admin</li>
+            <li>Registro sin friccion para el mecanico</li>
+            <li>Asociado al trabajo con fecha automatica</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="operations">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">10</div>
+          <h3>Servicios Tercerizados</h3>
+          <span class="module-tag tag-operations">Operaciones</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Trabajos que se mandan afuera: escapero, tapicero, electricista, etc.</p>
+          <ul>
+            <li>Descripcion del servicio</li>
+            <li>Costo sin IVA + checkbox "es mas IVA"</li>
+            <li>Asociacion con proveedor</li>
+            <li>Vinculado a la orden de trabajo</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="operations">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">11</div>
+          <h3>Proveedores</h3>
+          <span class="module-tag tag-operations">Operaciones</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Registro de terceros con los que trabaja Signature Garage.</p>
+          <ul>
+            <li>CRUD de proveedores</li>
+            <li>Asociable a ubicaciones, servicios y repuestos</li>
+            <li>Reportes futuros de gasto por proveedor</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <!-- ADMIN -->
+      <div class="module-card" data-category="admin">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">12</div>
+          <h3>Administracion y Facturacion</h3>
+          <span class="module-tag tag-admin">Admin</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Gestion financiera de ordenes cerradas. Ajuste de cuentas, margenes, facturacion y cobro.</p>
+          <ul>
+            <li>Resumen de costos: horas, repuestos, servicios, insumos</li>
+            <li>Horas facturables editables (separadas de horas de taller)</li>
+            <li>Margenes configurables: valor hora USD, % repuestos, % servicios</li>
+            <li>Descuentos, cortesias (valor cero), ajustes</li>
+            <li>Calculo automatico: costo total vs. facturacion estimada</li>
+            <li>Generacion de PDF de cuenta</li>
+            <li>Link de presupuesto trackeable (abierto, aprobado)</li>
+            <li>Flujo: Cierre Taller &rarr; Cuenta Pasada &rarr; Cobrado</li>
+            <li>Reapertura de ordenes al taller si falta algo</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="admin">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">13</div>
+          <h3>Adelantos / Entregas</h3>
+          <span class="module-tag tag-admin">Admin</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Registro de pagos parciales del cliente durante el proceso.</p>
+          <ul>
+            <li>Monto, fecha y justificacion</li>
+            <li>Disponible desde la creacion del trabajo</li>
+            <li>Se descuenta del total al armar la cuenta</li>
+            <li>Se transfiere si se genera trabajo nuevo automatico</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="admin">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">14</div>
+          <h3>Pendientes de Cobro</h3>
+          <span class="module-tag tag-admin">Admin</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Vista consolidada de todo lo que hay para cobrar.</p>
+          <ul>
+            <li>Lista automatica de ordenes "Cuenta Pasada a Cliente"</li>
+            <li>Monto total pendiente con desglose</li>
+            <li>Adelantos descontados</li>
+            <li>Pendientes de guarderia incluidos</li>
+            <li>Al confirmar cobro se saca de la lista</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="admin">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">15</div>
+          <h3>Guarderia de Vehiculos</h3>
+          <span class="module-tag tag-admin">Admin</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Gestion del almacenamiento de ~40 vehiculos. Pagos mensuales y servicios periodicos.</p>
+          <ul>
+            <li>Registro de vehiculos con propietario, km, fecha ingreso</li>
+            <li>Pagos mensuales: quien esta al dia, quien no</li>
+            <li>Semaforo de servicios: verde (al dia), amarillo (proximo), rojo (vencido)</li>
+            <li>Servicios por tiempo (no por km &mdash; PDE)</li>
+            <li>Genera ordenes de taller desde la ficha de guarderia</li>
+            <li>Notas y observaciones por vehiculo</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <!-- CLIENT -->
+      <div class="module-card" data-category="client">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">16</div>
+          <h3>Clientes / CRM Basico</h3>
+          <span class="module-tag tag-client">Cliente</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Base de datos de clientes con funcionalidades minimas de CRM.</p>
+          <ul>
+            <li>CRUD completo con cumpleanos y ultimo servicio</li>
+            <li>Vehiculos asociados (1 a muchos)</li>
+            <li>Historial de trabajos por vehiculo</li>
+            <li>Clientes especiales para cargos internos (Taller, Socio, Ventas, Cortesia)</li>
+            <li>Base para automatizaciones futuras: cumpleanos, avisos de servicio</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="client">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">17</div>
+          <h3>QR e Historial para Cliente</h3>
+          <span class="module-tag tag-client">Cliente</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Acceso limitado para el cliente al estado de su vehiculo.</p>
+          <ul>
+            <li>QR por trabajo: estado actual, etapa del proceso</li>
+            <li>Historial del vehiculo (vista limitada)</li>
+            <li>PDF del scanner adjunto si aplica</li>
+            <li>No ve: costos internos, diagnosticos detallados, horas, margenes</li>
+            <li>Futuro: QR en sticker para parabrisas</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card" data-category="client">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">18</div>
+          <h3>Notificaciones</h3>
+          <span class="module-tag tag-client">Cliente</span>
+          <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="module-body"><div class="module-content">
+          <p>Sistema de notificaciones para mantener informados a todos los actores.</p>
+          <ul>
+            <li>Diagnostico enviado &rarr; Taller notifica a Admin</li>
+            <li>Solicitud de pedido &rarr; Taller notifica a Admin</li>
+            <li>Cierre de taller &rarr; Admin recibe aviso para facturar</li>
+            <li>Repuesto no disponible &rarr; Admin notifica a Taller</li>
+            <li>Presupuesto y cuenta &rarr; Sistema envia al Cliente</li>
+            <li>Servicio de guarderia proximo &rarr; Push a Admin</li>
+            <li>Canales: Push, Email, WhatsApp (futuro)</li>
+          </ul>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS FLOW -->
+<section id="flujo">
+  <div class="container reveal">
+    <div class="section-label">Flujo de Negocio</div>
+    <div class="section-title">Ciclo de vida de una orden</div>
+    <div class="section-desc">Desde que se detecta una necesidad hasta que se cobra. Cada paso tiene reglas claras y responsables definidos.</div>
+
+    <div class="flow-container">
+      <div class="flow-step">
+        <div class="flow-marker"><div class="flow-dot">1</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <div class="flow-who">Admin / Encargado</div>
+          <h3>Creacion</h3>
+          <p>Se crea la orden con motivo obligatorio. Se desglosa en checklist de tareas, se asocia cliente y vehiculo, se asigna prioridad semaforo y opcionalmente se registra un adelanto.</p>
+          <div class="flow-detail">Ejemplo: auto de guarderia con ruido en tren delantero. Items: <code>Diagnosticar ruido</code> + <code>Inflar ruedas</code>. Prioridad: Amarillo.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-marker"><div class="flow-dot">2</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <div class="flow-who">Admin / Encargado</div>
+          <h3>Agendado (opcional)</h3>
+          <p>Se coordina fecha con el cliente. Solo relevante para clientes externos. Autos cautivos (guarderia/venta) se manejan por prioridad, no por agenda.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-marker"><div class="flow-dot">3</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <div class="flow-who">Taller</div>
+          <h3>Ingreso e Inspeccion</h3>
+          <p>El auto llega. La app guia la inspeccion paso a paso: fotos obligatorias del vehiculo, PDF del scanner electronico (OBD), y asignacion de ubicacion.</p>
+          <div class="flow-detail">Paraguas legal: el scanner registra fallas existentes al ingreso. Si el cliente reclama despues, se demuestra que ya existia.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-marker"><div class="flow-dot">4</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <div class="flow-who">Mecanico + Admin en paralelo</div>
+          <h3>En Proceso</h3>
+          <p>Trabajo activo. El mecanico carga horas, diagnosticos, solicita pedidos, instala repuestos, carga insumos y marca items completados. Admin gestiona repuestos, costos y adelantos en paralelo.</p>
+          <div class="flow-detail">Resumen visible en todo momento: horas, repuestos, servicios, insumos, items completados vs. total. Montos solo visibles para admin.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-marker"><div class="flow-dot" style="background:var(--sg-yellow);color:var(--sg-black)">!</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <div class="flow-who">Taller / Admin</div>
+          <h3>En Espera de Repuesto (temporal)</h3>
+          <p>Stand-by hasta que llegue una pieza critica. El auto puede quedarse en taller o irse. Cuando llega el repuesto, se reactiva a En Proceso.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-marker"><div class="flow-dot">5</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <div class="flow-who">Mecanico &rarr; Admin</div>
+          <h3>Cierre de Taller</h3>
+          <p>El mecanico cierra la orden. El checklist debe estar 100% marcado, o cada item pendiente requiere un motivo: no se consigue repuesto, cliente no acepta, reagenda, etc.</p>
+          <div class="flow-detail">Si un item queda por <code>demora en importacion</code> o <code>reagenda</code> &rarr; se genera automaticamente un trabajo nuevo vinculado. La orden queda <strong>bloqueada</strong>. Solo admin puede reabrir.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-marker"><div class="flow-dot">6</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <div class="flow-who">Admin / Socios</div>
+          <h3>Administracion y Facturacion</h3>
+          <p>Admin define horas facturables (pueden diferir de las del taller), aplica margenes, descuentos y cortesias. Genera PDF de cuenta o link trackeable para el cliente.</p>
+          <div class="flow-detail">Calculo: <code>Horas facturables x Valor hora</code> + <code>Repuestos x (1+margen%)</code> + <code>Servicios x (1+margen%)</code> + <code>Insumos</code> - <code>Adelantos</code> = <strong>Saldo a cobrar</strong></div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-marker"><div class="flow-dot" style="background:var(--sg-green)">&#10003;</div><div class="flow-line"></div></div>
+        <div class="flow-content">
+          <div class="flow-who">Admin</div>
+          <h3>Cobrado</h3>
+          <p>El cliente paga. Admin confirma, el estado pasa a Cobrado y se saca automaticamente de pendientes de cobro. Trabajo finalizado.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ROLES -->
+<section id="roles">
+  <div class="container reveal">
+    <div class="section-label">Usuarios</div>
+    <div class="section-title">Roles y permisos</div>
+    <div class="section-desc">Tres niveles de acceso con separacion estricta. El mecanico nunca ve plata.</div>
+    <div class="roles-grid">
+
+      <div class="role-card">
+        <div class="role-icon" style="background:rgba(59,130,246,.1)">&#128295;</div>
+        <h3>Mecanico / Taller</h3>
+        <p>Operario que trabaja en los vehiculos. Usa la app desde su celular con las manos sucias.</p>
+        <ul class="role-perms">
+          <li>Ver trabajos asignados y cola de prioridad</li>
+          <li>Ver y completar checklist de tareas</li>
+          <li>Agregar diagnosticos mecanicos</li>
+          <li>Solicitar pedidos de repuestos</li>
+          <li>Cargar horas de trabajo</li>
+          <li>Cargar insumos y materiales</li>
+          <li>Cerrar orden de taller</li>
+          <li>Cambiar ubicacion del vehiculo</li>
+          <li class="denied">No ve montos, costos ni precios</li>
+          <li class="denied">No puede editar orden cerrada</li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon" style="background:rgba(168,85,247,.1)">&#128188;</div>
+        <h3>Administracion</h3>
+        <p>Personal administrativo. Gestiona compras, costos, facturacion y cobros.</p>
+        <ul class="role-perms">
+          <li>Todo lo del mecanico en lectura</li>
+          <li>Gestionar modulo de repuestos completo</li>
+          <li>Cargar costos y servicios tercerizados</li>
+          <li>Registrar adelantos de clientes</li>
+          <li>Ajustar cuenta al cierre: horas, montos, cortesias</li>
+          <li>Generar PDF y link de presupuesto</li>
+          <li>Cambiar estado a Cuenta Pasada y Cobrado</li>
+          <li>Reabrir ordenes cerradas</li>
+          <li>Gestionar guarderia y clientes</li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon" style="background:rgba(172,29,40,.15)">&#11088;</div>
+        <h3>Socio / Director</h3>
+        <p>Los duenos. Acceso total al sistema, configuracion y reportes.</p>
+        <ul class="role-perms">
+          <li>Todo lo de Administracion</li>
+          <li>Configurar margenes y valores (hora, % repuestos, % servicios)</li>
+          <li>Gestionar usuarios y roles</li>
+          <li>Acceder a reportes globales</li>
+          <li>Crear ubicaciones, proveedores, operarios</li>
+          <li>Gestionar modulo de guarderia y ventas</li>
+          <li>Publicar vehiculos a la web (futuro)</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PHASES -->
+<section id="fases">
+  <div class="container reveal">
+    <div class="section-label">Implementacion</div>
+    <div class="section-title">Fases del proyecto</div>
+    <div class="section-desc">Desarrollo iterativo e incremental. Cada fase entrega valor funcional inmediato.</div>
+
+    <div class="phases-grid">
+
+      <div class="phase-card">
+        <div class="phase-header">
+          <div class="phase-number">01</div>
+          <div class="phase-info"><h3>MVP &mdash; Taller Operativo</h3><div class="phase-time">Semanas 1&ndash;6</div></div>
+        </div>
+        <ul class="phase-items">
+          <li>Auth basico (login, roles)</li>
+          <li>CRUD Vehiculos, Clientes, Ubicaciones, Proveedores, Operarios</li>
+          <li>Orden de Trabajo con flujo completo de estados</li>
+          <li>Checklist con validacion al cierre</li>
+          <li>Prioridad semaforo</li>
+          <li>Carga de horas e insumos</li>
+          <li>Solicitud de pedidos y diagnostico mecanico</li>
+          <li>Inspeccion de ingreso (fotos + PDF)</li>
+          <li>Cierre de taller con bloqueo</li>
+          <li>Vista de administracion para facturacion basica</li>
+          <li>Cambio de ubicacion con historial</li>
+        </ul>
+        <div class="phase-bar"><div class="phase-bar-fill" style="width:0%" data-width="0"></div></div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-header">
+          <div class="phase-number">02</div>
+          <div class="phase-info"><h3>Completar Taller</h3><div class="phase-time">Semanas 7&ndash;10</div></div>
+        </div>
+        <ul class="phase-items">
+          <li>Modulo de repuestos con seguimiento de status</li>
+          <li>Servicios tercerizados</li>
+          <li>Adelantos / entregas</li>
+          <li>Generacion de PDF de cuenta</li>
+          <li>Pendientes de cobro (vista consolidada)</li>
+          <li>Generacion automatica de nuevo trabajo al cierre</li>
+          <li>Configuracion de margenes y valores</li>
+        </ul>
+        <div class="phase-bar"><div class="phase-bar-fill" style="width:0%" data-width="0"></div></div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-header">
+          <div class="phase-number">03</div>
+          <div class="phase-info"><h3>Guarderia</h3><div class="phase-time">Semanas 11&ndash;13</div></div>
+        </div>
+        <ul class="phase-items">
+          <li>Modulo de guarderia completo</li>
+          <li>Pagos mensuales con seguimiento</li>
+          <li>Semaforo de servicios periodicos</li>
+          <li>Integracion guarderia &rarr; taller (generar OT)</li>
+        </ul>
+        <div class="phase-bar"><div class="phase-bar-fill" style="width:0%" data-width="0"></div></div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-header">
+          <div class="phase-number">04</div>
+          <div class="phase-info"><h3>CRM y Cliente</h3><div class="phase-time">Semanas 14&ndash;16</div></div>
+        </div>
+        <ul class="phase-items">
+          <li>Base de clientes con cumpleanos y ultimo servicio</li>
+          <li>QR con historial para el cliente</li>
+          <li>Link de presupuesto trackeable</li>
+          <li>Notificaciones automatizadas</li>
+        </ul>
+        <div class="phase-bar"><div class="phase-bar-fill" style="width:0%" data-width="0"></div></div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-header">
+          <div class="phase-number">05</div>
+          <div class="phase-info"><h3>Evolucion Continua</h3><div class="phase-time">Post-lanzamiento</div></div>
+        </div>
+        <ul class="phase-items">
+          <li>Reportes avanzados de eficiencia y produccion</li>
+          <li>Link de pago con pasarela (Mercado Pago)</li>
+          <li>Publicacion web de vehiculos desde la app</li>
+          <li>Automatizacion WhatsApp</li>
+          <li>Offline mode para mecanicos</li>
+          <li>Integracion con GNS (facturacion)</li>
+        </ul>
+        <div class="phase-bar"><div class="phase-bar-fill" style="width:0%" data-width="0"></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TECH -->
+<section id="tech">
+  <div class="container reveal">
+    <div class="section-label">Tecnologia</div>
+    <div class="section-title">Stack tecnologico</div>
+    <div class="section-desc">Arquitectura moderna, mantenible y escalable. PWA mobile-first para el mecanico, responsive para admin.</div>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <h4>Frontend</h4>
+        <div class="tech-item"><span class="tech-name">Next.js 14+</span><span class="tech-desc">App Router, SSR, PWA</span></div>
+        <div class="tech-item"><span class="tech-name">React + TypeScript</span><span class="tech-desc">Type-safety end-to-end</span></div>
+        <div class="tech-item"><span class="tech-name">Tailwind + shadcn/ui</span><span class="tech-desc">Mobile-first, app-like</span></div>
+        <div class="tech-item"><span class="tech-name">React Query</span><span class="tech-desc">Cache, sync, loading</span></div>
+      </div>
+      <div class="tech-card">
+        <h4>Backend</h4>
+        <div class="tech-item"><span class="tech-name">Next.js API Routes</span><span class="tech-desc">REST API integrada</span></div>
+        <div class="tech-item"><span class="tech-name">Prisma ORM</span><span class="tech-desc">Type-safe, migraciones</span></div>
+        <div class="tech-item"><span class="tech-name">NextAuth.js</span><span class="tech-desc">Sesiones, roles, auth</span></div>
+        <div class="tech-item"><span class="tech-name">PostgreSQL</span><span class="tech-desc">Base de datos principal</span></div>
+      </div>
+      <div class="tech-card">
+        <h4>Infraestructura</h4>
+        <div class="tech-item"><span class="tech-name">Railway</span><span class="tech-desc">Hosting app + DB</span></div>
+        <div class="tech-item"><span class="tech-name">Cloudflare R2</span><span class="tech-desc">Fotos, PDFs, QR</span></div>
+        <div class="tech-item"><span class="tech-name">Resend</span><span class="tech-desc">Emails transaccionales</span></div>
+        <div class="tech-item"><span class="tech-name">Web Push API</span><span class="tech-desc">Notificaciones push</span></div>
+      </div>
+      <div class="tech-card">
+        <h4>Experiencia PWA</h4>
+        <div class="tech-item"><span class="tech-name">Instalable</span><span class="tech-desc">Add to Home Screen</span></div>
+        <div class="tech-item"><span class="tech-name">Service Worker</span><span class="tech-desc">Cache y carga rapida</span></div>
+        <div class="tech-item"><span class="tech-name">Camara nativa</span><span class="tech-desc">Fotos desde la app</span></div>
+        <div class="tech-item"><span class="tech-name">Offline (futuro)</span><span class="tech-desc">Cargar sin conexion</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2>Listo para ordenar Signature Garage</h2>
+    <p>Esta propuesta detalla el alcance, modulos, flujo y tecnologia. El siguiente paso es validar y arrancar.</p>
+    <div class="cta-buttons">
+      <a href="mailto:info@latitudnomade.com?subject=Aprobacion%20Propuesta%20Signature%20Garage" class="btn btn-primary">Aprobar Propuesta</a>
+      <a href="mailto:info@latitudnomade.com?subject=Consultas%20Propuesta%20Signature%20Garage" class="btn btn-secondary">Tengo Preguntas</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>Propuesta preparada por <a href="#">Latitud Nomade</a> para Signature Garage &mdash; Febrero 2026</p>
+  <p style="margin-top:.5rem">Documento confidencial. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+// Toggle modules
+function toggleModule(header) {
+  const card = header.parentElement;
+  card.classList.toggle('open');
+}
+
+// Category filter
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.module-card').forEach(card => {
+      if (filter === 'all' || card.dataset.category === filter) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Active nav link
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 100;
+    if (window.scrollY >= top) current = section.getAttribute('id');
+  });
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+});
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+// Animate phase bars on scroll
+const phaseObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const fill = entry.target.querySelector('.phase-bar-fill');
+      if (fill) fill.style.width = fill.dataset.width;
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.phase-card').forEach(el => phaseObserver.observe(el));
+</script>
+</body>
+</html>
