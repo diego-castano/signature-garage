@@ -671,6 +671,15 @@
             margin: 24px 0;
         }
 
+        .roles-grid-bottom {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 0 auto;
+            margin-top: 16px;
+            max-width: 66.666%;
+        }
+
         .role-card {
             background: var(--bg);
             border: 1px solid var(--border);
@@ -1042,6 +1051,7 @@
 
             .pain-grid { grid-template-columns: 1fr; }
             .roles-grid { grid-template-columns: 1fr; }
+            .roles-grid-bottom { grid-template-columns: 1fr; max-width: 100%; }
             .phase-items { columns: 1; }
 
             .scope-card { padding: 16px 18px; gap: 0; position: relative; }
@@ -1072,6 +1082,7 @@
             .mod-list { display: block !important; }
             .pain-grid { grid-template-columns: 1fr; }
             .roles-grid { grid-template-columns: 1fr; }
+            .roles-grid-bottom { grid-template-columns: 1fr; max-width: 100%; }
         }
     </style>
 </head>
@@ -1158,7 +1169,7 @@
                 </p>
 
                 <p>
-                    Se propone desarrollar una aplicacion a medida que funcione como <strong>la fuente unica de verdad del negocio</strong>. Todo lo que pasa en el taller, en la guarderia y en el proceso de venta se registra en un solo lugar. La app se usa desde el celular por los mecanicos y desde la computadora por administracion y los socios.
+                    Se propone desarrollar una aplicacion a medida que funcione como <strong>la fuente unica de verdad del negocio</strong>. Todo lo que pasa en el taller, en la guarderia y en el proceso de venta se registra en un solo lugar.
                 </p>
 
                 <p>
@@ -1192,6 +1203,10 @@
                         <span>No hay forma de saber quien pago y quien no. Los cobros se acumulan y se olvidan.</span>
                     </div>
                 </div>
+
+                <p>
+                    La app funciona desde cualquier dispositivo &mdash; celular, tablet o computadora. Cada rol tiene su experiencia optimizada, pero sin restriccion de plataforma. El mecanico puede usarla desde el celular en el taller o desde una PC fija; administracion y los socios acceden desde donde les resulte mas comodo.
+                </p>
 
                 <p>
                     La aplicacion se entrega en fases progresivas. Desde la primera fase, el taller puede empezar a operar. Las fases siguientes agregan repuestos, guarderia, CRM y reportes.
@@ -1262,8 +1277,8 @@
                     <div class="scope-card">
                         <div class="card-ico">&#128274;</div>
                         <div class="card-body">
-                            <strong>Tres roles con permisos estrictos</strong>
-                            <span>Mecanico (no ve plata), Administracion (gestiona numeros), Socio/Director (ve todo y configura).</span>
+                            <strong>Cinco roles con permisos estrictos</strong>
+                            <span>Mecanico (no ve plata), Jefe de Taller (ve metricas y numeros del taller), Administracion (gestiona numeros y compras), Comercial (ve todo de ventas), Socio/Director (ve todo y configura).</span>
                         </div>
                     </div>
                 </div>
@@ -1333,7 +1348,7 @@
                         <div class="flow-body">
                             <div class="who">Taller</div>
                             <h4>Ingreso e inspeccion</h4>
-                            <p>El auto llega al taller. La app guia al mecanico paso a paso: <strong>fotos obligatorias</strong> del vehiculo (frente, costados, trasera, interior, detalle de roturas), <strong>PDF del scanner electronico</strong> (OBD) que registra las fallas que ya tenia el auto, y <strong>asignacion de ubicacion</strong>. Esto protege al taller de reclamos futuros. Si algo no aplica (ej: vehiculo clasico sin scanner), se pide justificacion. Al completar, pasa automaticamente a "En Proceso".</p>
+                            <p>El auto llega al taller. La app guia al mecanico paso a paso: <strong>fotos obligatorias</strong> del vehiculo (frente, costados, trasera, interior, detalle de roturas) e <strong>inspeccion electronica</strong> segun el tipo de vehiculo: si es un auto moderno, se sube el PDF del scanner OBD que registra todas las fallas existentes; si es un auto veterano o clasico, se carga el resultado del testeo de bateria con scanner. Esto protege al taller de reclamos futuros. Si ninguna inspeccion electronica aplica, se pide justificacion. En esta etapa el vehiculo esta fisicamente en SG, por lo que <strong>no se asigna ubicacion</strong> &mdash; se registrara recien cuando el vehiculo salga a un tercero. Al completar, pasa automaticamente a "En Proceso".</p>
                         </div>
                     </div>
                     <div class="flow-step">
@@ -1342,6 +1357,9 @@
                             <div class="who">Mecanico + Admin en paralelo</div>
                             <h4>En proceso</h4>
                             <p>El mecanico ve su cola de trabajos por semaforo. Abre un trabajo, ve el checklist y trabaja: <strong>carga horas</strong>, <strong>registra diagnosticos</strong>, <strong>carga insumos</strong>, <strong>solicita repuestos</strong>, <strong>marca items como completados</strong>. En paralelo, administracion recibe solicitudes de repuestos, cotiza, encarga, registra costos y puede enviar presupuestos al cliente para aprobar trabajos adicionales.</p>
+                            <p>Cuando se necesita verificar el trabajo realizado, el mecanico registra <strong>pruebas de ruta</strong> (cortas o largas) con fecha, hora y operario responsable.</p>
+                            <p>Cuando llegan facturas de proveedores externos (escapero, tapicero, electricista), administracion las carga directamente contra la orden con monto, proveedor, descripcion e IVA. Estos costos son visibles solo para admin y socios &mdash; el taller no ve los montos negociados con proveedores externos.</p>
+                            <p>Si por algun trabajo tercerizado el vehiculo sale de SG, se registra la nueva ubicacion con fecha y hora. La ubicacion puede cambiar varias veces dentro de una misma orden &mdash; el auto puede ir a un tapicero, volver, ir a un escapero, volver, o incluso volver a un proveedor por un reclamo. Cada movimiento queda registrado con timestamp. Cuando la ubicacion es un proveedor externo, el sistema calcula automaticamente cuanto tiempo estuvo el vehiculo ahi, lo que permite medir y comparar tiempos de respuesta de cada proveedor.</p>
                         </div>
                     </div>
                     <div class="flow-step">
@@ -1366,6 +1384,7 @@
                             <div class="who">Admin / Socios</div>
                             <h4>Facturacion</h4>
                             <p>Admin ve el resumen de costos, define cuantas <strong>horas se facturan</strong>, aplica <strong>margenes</strong>, ajusta montos y genera <strong>PDF de la cuenta</strong> o un <strong>link trackeable</strong> para el cliente. Si falta algo puede <strong>reabrir</strong> la orden al taller.</p>
+                            <p>El sistema preserva ambos numeros por separado: las horas que el taller realmente trabajo y las horas que se le cobran al cliente. La diferencia entre ambas es un indicador clave de eficiencia. Si el taller trabajo 100 horas y solo se facturan 70, esas 30 horas de diferencia quedan registradas para analisis &mdash; pueden ser ineficiencia, cortesia, o trabajo comercial no cobrable.</p>
                         </div>
                     </div>
                     <div class="flow-step">
@@ -1380,7 +1399,15 @@
 
                 <h3>Flujos adicionales</h3>
                 <p><strong>Guarderia:</strong> Un auto de guarderia que necesita trabajo mecanico genera una orden normal. Se trabaja como cualquier otro auto. El historial queda vinculado al vehiculo. Aparte, la guarderia tiene su propio control de pagos mensuales y semaforo de servicios periodicos (por tiempo, no por km, porque en Punta del Este los autos se usan poco).</p>
-                <p><strong>Cargos internos:</strong> Para errores del mecanico, uso personal de socios, preparacion de autos para venta o cortesias, se crea una orden asignada a un "cliente especial" (Taller, Socio, Ventas o Cortesia). Sigue el mismo flujo pero no se factura a un cliente externo. Las horas y costos quedan registrados.</p>
+                <p><strong>Datos maestros:</strong> Clientes y vehiculos son entidades separadas. Los vehiculos se identifican por VIN y pueden vincularse a diferentes clientes a lo largo del tiempo. Un cliente puede tener multiples vehiculos. El historial del vehiculo permanece intacto independientemente de quien sea el dueno actual.</p>
+                <p><strong>Cargos internos:</strong> Para trabajo que no se factura a un cliente externo, se crea una orden asignada a un "cliente especial" segun la categoria:</p>
+                <ul class="feat-list">
+                    <li><strong>Taller</strong> &mdash; errores, retrabajos o reclamos del taller (ej: se entrego un auto y hay que corregir algo)</li>
+                    <li><strong>Socio</strong> &mdash; uso personal de vehiculos de los socios (con nombre del socio)</li>
+                    <li><strong>Ventas</strong> &mdash; preparacion mecanica de autos destinados a venta</li>
+                    <li><strong>Cortesia</strong> &mdash; trabajos que se regalan al cliente por gesto comercial</li>
+                </ul>
+                <p>Estas ordenes siguen el mismo flujo completo pero no se facturan a un cliente externo. Las horas y costos quedan registrados y separados, lo que permite medir: cuantas horas productivas tiene el taller vs. cuantas se destinan a retrabajos, uso interno o cortesias. Es la base para evaluar la eficiencia real del taller y detectar problemas sistematicos (ej: demasiados reclamos, demasiado uso personal).</p>
             </div>
 
             <hr class="section-divider">
@@ -1416,11 +1443,13 @@
                         <div class="mod">
                             <div class="mod-name">Inspeccion de Ingreso</div>
                             <div class="mod-for">&#128100; Taller</div>
-                            <p class="mod-desc">Fotos obligatorias + PDF del scanner al recibir el auto. Proteccion legal ante reclamos futuros.</p>
+                            <p class="mod-desc">Fotos obligatorias + inspeccion electronica al recibir el auto. Proteccion legal ante reclamos futuros.</p>
                             <ul class="feat-list">
-                                <li>Fotos: frente, costados, trasera, interior, detalles</li>
-                                <li>PDF del scanner (OBD) con fallas existentes al ingreso</li>
-                                <li>Si no aplica, justificacion obligatoria</li>
+                                <li>Fotos obligatorias: frente, costados, trasera, interior, detalles de roturas</li>
+                                <li>Auto moderno: PDF del scanner OBD con fallas existentes al ingreso</li>
+                                <li>Auto veterano/clasico: testeo de bateria con scanner</li>
+                                <li>Si no aplica ninguna inspeccion electronica, justificacion obligatoria</li>
+                                <li>Ubicacion no se asigna en ingreso (el vehiculo esta en SG)</li>
                             </ul>
                         </div>
                         <div class="mod">
@@ -1439,8 +1468,22 @@
                             <p class="mod-desc">Registro de tiempo por tarea. Las horas del taller quedan congeladas; admin decide cuantas se facturan. Permite medir eficiencia.</p>
                             <ul class="feat-list">
                                 <li>Horas en decimales (0.2, 1.5) con descripcion obligatoria</li>
+                                <li>Selector de operario al cargar horas (lista administrable de operarios)</li>
                                 <li>Total acumulado visible en todo momento</li>
                                 <li>Horas reales vs. facturables separadas</li>
+                            </ul>
+                        </div>
+                        <div class="mod">
+                            <div class="mod-name">Pruebas de Ruta</div>
+                            <div class="mod-for">&#128100; Mecanico, Jefe de Taller</div>
+                            <p class="mod-desc">Registro de salidas a probar el vehiculo en ruta. Dos tipos: prueba corta (vuelta al barrio, verificacion basica) y prueba larga (ruta extendida, verificacion en condiciones reales). Cada prueba registra fecha y hora de salida y regreso, tipo, operario y observaciones. Puede haber multiples pruebas de ruta en una misma orden. Queda registro de cuando se saco el auto, quien lo saco y por cuanto tiempo.</p>
+                            <ul class="feat-list">
+                                <li>Tipo: prueba corta / prueba larga</li>
+                                <li>Fecha y hora de inicio y fin</li>
+                                <li>Operario que realiza la prueba</li>
+                                <li>Observaciones</li>
+                                <li>Multiples pruebas por orden</li>
+                                <li>Calculo automatico de duracion</li>
                             </ul>
                         </div>
                         <div class="mod">
@@ -1451,7 +1494,15 @@
                         <div class="mod">
                             <div class="mod-name">Ubicaciones</div>
                             <div class="mod-for">&#128100; Taller, Admin</div>
-                            <p class="mod-desc">Donde esta cada auto: taller, proveedor tercero o casa del cliente. Historial de movimientos. Resuelve "donde esta ese auto?" sin preguntar.</p>
+                            <p class="mod-desc">Donde esta cada auto en cada momento. Historial completo de movimientos con fecha y hora. Cuando el auto esta en un proveedor externo, se calcula automaticamente el tiempo que permanecio ahi. Resuelve "donde esta ese auto?" y "cuanto tarda este proveedor?".</p>
+                            <ul class="feat-list">
+                                <li>Historial de ubicaciones con timestamp (fecha y hora de cada cambio)</li>
+                                <li>Multiples cambios de ubicacion dentro de una misma orden</li>
+                                <li>Calculo automatico de tiempo en proveedor externo</li>
+                                <li>Ubicaciones predefinidas: SG, casa del cliente, proveedores registrados</li>
+                                <li>Si el proveedor no existe, se crea al momento</li>
+                                <li>Base para reportes de tiempos por proveedor</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -1483,11 +1534,20 @@
                             <div class="mod-name">Servicios Tercerizados</div>
                             <div class="mod-for">&#128100; Admin</div>
                             <p class="mod-desc">Trabajos que se mandan afuera: escapero, tapicero, electricista. Con costo, proveedor e IVA. Se integra en la cuenta.</p>
+                            <ul class="feat-list">
+                                <li>Carga exclusiva de administracion (el taller no ve costos de proveedores)</li>
+                                <li>Factura del proveedor asociada a la orden</li>
+                                <li>Registro de IVA por transaccion</li>
+                            </ul>
                         </div>
                         <div class="mod">
                             <div class="mod-name">Proveedores</div>
                             <div class="mod-for">&#128100; Admin</div>
                             <p class="mod-desc">Base de datos de terceros. Se asocian a repuestos, servicios y ubicaciones. Base para reportes de gasto.</p>
+                            <ul class="feat-list">
+                                <li>Tiempo promedio de trabajo calculado automaticamente desde el historial de ubicaciones</li>
+                                <li>Base para evaluar, comparar y negociar con proveedores</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -1557,7 +1617,7 @@
                         <div class="mod">
                             <div class="mod-name">Vehiculos</div>
                             <div class="mod-for">&#128100; Todos</div>
-                            <p class="mod-desc">Ficha de cada vehiculo con historial completo. El vehiculo es la entidad central: la deuda esta con el vehiculo, no con el cliente. Codigo QR para acceso rapido.</p>
+                            <p class="mod-desc">Ficha de cada vehiculo identificado por VIN (numero unico de chasis). El vehiculo es la entidad central del sistema: la deuda, el historial y los trabajos estan vinculados al vehiculo, no al cliente. Los vehiculos se asocian a clientes, pero esta relacion puede cambiar con el tiempo (un auto se vende, cambia de dueno). El sistema mantiene el historial de propietarios. Codigo QR para acceso rapido.</p>
                         </div>
                         <div class="mod">
                             <div class="mod-name">CRM Basico / Clientes</div>
@@ -1599,27 +1659,56 @@
                             <div class="role-avatar">&#128295;</div>
                             <div class="role-info">
                                 <h4>Mecanico</h4>
-                                <span>Usa el celular en el taller</span>
+                                <span>Usa celular o PC en el taller</span>
                             </div>
                         </div>
                         <div class="role-card-body">
                             <div class="role-section-label">Puede</div>
                             <ul class="can">
-                                <li>Ver sus trabajos por semaforo</li>
+                                <li>Ver sus trabajos asignados por semaforo</li>
                                 <li>Completar checklist de tareas</li>
-                                <li>Cargar diagnosticos y horas</li>
+                                <li>Cargar diagnosticos y horas (con operario)</li>
                                 <li>Solicitar repuestos</li>
                                 <li>Cargar insumos y materiales</li>
+                                <li>Registrar pruebas de ruta (corta y larga)</li>
                                 <li>Cerrar la orden con validacion</li>
-                                <li>Fotos de ingreso y scanner</li>
+                                <li>Fotos de ingreso y scanner/testeo bateria</li>
                                 <li>Cambiar ubicacion del vehiculo</li>
                             </ul>
                             <div class="role-section-label">No puede</div>
                             <ul class="cant">
                                 <li>Ver montos, costos ni precios</li>
-                                <li>Modificar items originales</li>
+                                <li>Modificar items originales del checklist</li>
                                 <li>Editar una orden cerrada</li>
-                                <li>Acceder a facturacion ni reportes</li>
+                                <li>Acceder a facturacion, metricas ni reportes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-card-header">
+                            <div class="role-avatar">&#127981;</div>
+                            <div class="role-info">
+                                <h4>Jefe de Taller</h4>
+                                <span>Supervisa la operacion del taller</span>
+                            </div>
+                        </div>
+                        <div class="role-card-body">
+                            <div class="role-section-label">Puede</div>
+                            <ul class="can">
+                                <li>Todo lo del mecanico</li>
+                                <li>Ver metricas del taller: horas, tiempos, carga por operario</li>
+                                <li>Ver numeros del taller (costos de horas, insumos)</li>
+                                <li>Vista global de todos los trabajos y su estado</li>
+                                <li>Ver tiempos de repuestos pendientes</li>
+                                <li>Reportes de rendimiento del taller</li>
+                            </ul>
+                            <div class="role-section-label">No puede</div>
+                            <ul class="cant">
+                                <li>Ver margenes de facturacion ni precios al cliente</li>
+                                <li>Modificar costos de repuestos o servicios tercerizados</li>
+                                <li>Acceder a facturacion ni gestion de cobros</li>
+                                <li>Configurar parametros del sistema</li>
                             </ul>
                         </div>
                     </div>
@@ -1629,25 +1718,54 @@
                             <div class="role-avatar">&#128203;</div>
                             <div class="role-info">
                                 <h4>Administracion</h4>
-                                <span>Gestiona numeros y compras</span>
+                                <span>Gestiona numeros, compras y facturacion</span>
                             </div>
                         </div>
                         <div class="role-card-body">
                             <div class="role-section-label">Puede</div>
                             <ul class="can">
-                                <li>Todo lo del mecanico (lectura)</li>
-                                <li>Gestionar repuestos completos</li>
-                                <li>Cargar costos y servicios</li>
-                                <li>Registrar adelantos</li>
-                                <li>Ajustar cuenta al cierre</li>
-                                <li>Generar PDF y links</li>
+                                <li>Todo lo del Jefe de Taller (lectura)</li>
+                                <li>Gestionar repuestos completos (cotizar, encargar, recibir)</li>
+                                <li>Cargar costos, facturas de proveedores y servicios tercerizados</li>
+                                <li>Registrar adelantos y pagos</li>
+                                <li>Ajustar cuenta al cierre (horas facturables, margenes, descuentos)</li>
+                                <li>Generar PDF de cuenta y links de presupuesto</li>
                                 <li>Reabrir ordenes cerradas</li>
                                 <li>Gestionar guarderia y clientes</li>
                             </ul>
                             <div class="role-section-label">No puede</div>
                             <ul class="cant">
-                                <li>Configurar margenes del sistema</li>
+                                <li>Configurar margenes globales del sistema</li>
                                 <li>Gestionar usuarios ni roles</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roles-grid-bottom">
+                    <div class="role-card">
+                        <div class="role-card-header">
+                            <div class="role-avatar">&#128188;</div>
+                            <div class="role-info">
+                                <h4>Comercial</h4>
+                                <span>Ve todo lo relacionado a ventas</span>
+                            </div>
+                        </div>
+                        <div class="role-card-body">
+                            <div class="role-section-label">Puede</div>
+                            <ul class="can">
+                                <li>Ver vehiculos en preparacion para venta y su estado</li>
+                                <li>Ver costos acumulados por vehiculo de venta</li>
+                                <li>Ver historial mecanico de vehiculos de venta</li>
+                                <li>Acceder al CRM: prospectos, clientes interesados</li>
+                                <li>Ver guarderia (lectura)</li>
+                            </ul>
+                            <div class="role-section-label">No puede</div>
+                            <ul class="cant">
+                                <li>Crear ni modificar ordenes de taller</li>
+                                <li>Gestionar repuestos ni proveedores</li>
+                                <li>Acceder a facturacion de taller</li>
+                                <li>Configurar parametros del sistema</li>
                             </ul>
                         </div>
                     </div>
@@ -1663,10 +1781,10 @@
                         <div class="role-card-body">
                             <div class="role-section-label">Puede</div>
                             <ul class="can">
-                                <li>Todo lo de Administracion</li>
-                                <li>Configurar margenes y valores</li>
+                                <li>Todo lo de Administracion y Comercial</li>
+                                <li>Configurar margenes, valores hora y porcentajes</li>
                                 <li>Gestionar usuarios y roles</li>
-                                <li>Reportes globales</li>
+                                <li>Reportes globales de eficiencia y rentabilidad</li>
                                 <li>Administrar ubicaciones y proveedores</li>
                                 <li>Gestion completa de guarderia</li>
                                 <li>Gestion completa de ventas</li>
@@ -1699,15 +1817,16 @@
                         </div>
                     </div>
                     <ul class="phase-items">
-                        <li>Login con roles (Mecanico, Admin, Director)</li>
+                        <li>Login con roles (Mecanico, Jefe de Taller, Admin, Comercial, Director)</li>
                         <li>Ficha de vehiculos, clientes, ubicaciones, proveedores</li>
                         <li>Ordenes de Trabajo con 8 estados</li>
                         <li>Checklist con validacion al cierre</li>
                         <li>Prioridad por semaforo</li>
-                        <li>Carga de horas e insumos</li>
+                        <li>Carga de horas (con operario) e insumos</li>
                         <li>Solicitud de repuestos con notificacion</li>
                         <li>Diagnostico mecanico</li>
-                        <li>Inspeccion de ingreso (fotos + scanner)</li>
+                        <li>Inspeccion de ingreso (fotos + scanner/testeo bateria)</li>
+                        <li>Pruebas de ruta (corta y larga) con registro de operario</li>
                         <li>Cierre de taller con bloqueo</li>
                         <li>Vista de admin para facturacion basica</li>
                         <li>Ubicaciones con historial</li>
