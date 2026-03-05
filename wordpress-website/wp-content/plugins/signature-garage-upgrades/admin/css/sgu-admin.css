@@ -1,0 +1,152 @@
+.sgu-wrap {
+    max-width: 960px;
+}
+
+.sgu-tabs {
+    margin-bottom: 20px;
+}
+
+/* Stats Grid */
+.sgu-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.sgu-stat-card {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+}
+
+.sgu-stat-number {
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1d2327;
+    line-height: 1.2;
+}
+
+.sgu-stat-label {
+    display: block;
+    font-size: 13px;
+    color: #646970;
+    margin-top: 4px;
+}
+
+/* Sections */
+.sgu-section {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin: 20px 0;
+}
+
+.sgu-section h2 {
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 16px;
+}
+
+/* Actions */
+.sgu-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0;
+}
+
+.sgu-inline-message {
+    color: #00a32a;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/* Progress Bar */
+.sgu-progress-bar-wrap {
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sgu-progress-bar {
+    flex: 1;
+    height: 24px;
+    background: #dcdcde;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.sgu-progress-fill {
+    height: 100%;
+    background: #2271b1;
+    border-radius: 12px;
+    transition: width 0.3s ease;
+}
+
+.sgu-progress-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1d2327;
+    white-space: nowrap;
+    min-width: 80px;
+}
+
+/* Log */
+.sgu-log {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 12px;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    background: #f6f7f7;
+    margin-top: 16px;
+}
+
+.sgu-log-entry {
+    padding: 2px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.sgu-log-entry:last-child {
+    border-bottom: none;
+}
+
+.sgu-log-success {
+    color: #00a32a;
+}
+
+.sgu-log-error {
+    color: #d63638;
+}
+
+.sgu-log-info {
+    color: #2271b1;
+}
+
+.sgu-log-warning {
+    color: #dba617;
+}
+
+/* Settings */
+.sgu-section .form-table th {
+    width: 180px;
+    padding: 12px 0;
+}
+
+.sgu-section .form-table td {
+    padding: 12px 0;
+}
+
+input[type="range"] {
+    vertical-align: middle;
+    width: 200px;
+}

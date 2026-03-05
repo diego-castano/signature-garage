@@ -18,5 +18,60 @@ define('SGU_VERSION', '1.0.0');
 define('SGU_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SGU_PLUGIN_URL', plugin_dir_url(__FILE__));
 
-// Load plugin modules
-// require_once SGU_PLUGIN_DIR . 'includes/example-module.php';
+// Core modules
+require_once SGU_PLUGIN_DIR . 'includes/class-sgu-logger.php';
+require_once SGU_PLUGIN_DIR . 'includes/class-sgu-image-optimizer.php';
+require_once SGU_PLUGIN_DIR . 'includes/class-sgu-admin.php';
+require_once SGU_PLUGIN_DIR . 'includes/class-sgu-image-hooks.php';
+require_once SGU_PLUGIN_DIR . 'includes/class-sgu-image-bulk.php';
+
+// GD check notice
+add_action('admin_notices', function () {
+    if (!SGU_Image_Optimizer::has_gd()) {
+        echo '<div class="notice notice-error"><p><strong>Signature Garage Upgrades:</strong> PHP GD extension is required for image optimization. Please contact your hosting provider.</p></div>';
+    }
+});
+
+// Initialize modules
+add_action('init', function () {
+    SGU_Logger::init();
+    SGU_Image_Hooks::init();
+    SGU_Logger::info('core', 'Plugin initialized', ['version' => SGU_VERSION]);
+});
+
+add_action('admin_init', function () {
+    SGU_Admin::init();
+    SGU_Image_Bulk::init();
+});
+
+// Activation: add WebP rewrite rules to .htaccess
+register_activation_hook(__FILE__, function () {
+    $rules = [
+        '<IfModule mod_rewrite.c>',
+        '  RewriteEngine On',
+        '  RewriteCond %{HTTP_ACCEPT} image/webp',
+        '  RewriteCond %{REQUEST_URI} \.(jpe?g|png)$',
+        '  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.webp -f',
+        '  RewriteRule ^(.+)\.(jpe?g|png)$ $1.webp [T=image/webp,L]',
+        '</IfModule>',
+        '',
+        '<IfModule mod_headers.c>',
+        '  <FilesMatch "\.(jpe?g|png|webp)$">',
+        '    Header append Vary Accept',
+        '  </FilesMatch>',
+        '</IfModule>',
+    ];
+
+    $htaccess = ABSPATH . '.htaccess';
+    if (is_writable($htaccess) || is_writable(dirname($htaccess))) {
+        insert_with_markers($htaccess, 'SGU WebP Delivery', $rules);
+    }
+});
+
+// Deactivation: remove WebP rewrite rules
+register_deactivation_hook(__FILE__, function () {
+    $htaccess = ABSPATH . '.htaccess';
+    if (is_writable($htaccess)) {
+        insert_with_markers($htaccess, 'SGU WebP Delivery', []);
+    }
+});
