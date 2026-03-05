@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="91.848" height="77.169" viewBox="0 0 91.848 77.169">
+  <defs>
+    <filter id="Path_494" x="0" y="0" width="91.848" height="77.169" filterUnits="userSpaceOnUse">
+      <feOffset dx="7" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur result="blur"/>
+      <feFlood flood-opacity="0.302"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="_01" x="19.5" y="13.5" width="35" height="58" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur result="blur-2"/>
+      <feFlood flood-color="#580101"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_323" data-name="Group 323" transform="translate(-268.5 -1738.5)">
+    <g transform="matrix(1, 0, 0, 1, 268.5, 1738.5)" filter="url(#Path_494)">
+      <path id="Path_494-2" data-name="Path 494" d="M0,0H72.169L84.848,35.5,72.169,72.169H0Z" fill="#ac1d28"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 268.5, 1738.5)" filter="url(#_01)">
+      <text id="_01-2" data-name="01" transform="translate(19.5 57.5)" fill="#ddd" font-size="37" font-family="Oswald-Regular, Oswald"><tspan x="0" y="0">01</tspan></text>
+    </g>
+    <text id="Step" transform="translate(290 1760)" fill="#ffc400" font-size="9" font-family="Oswald-Regular, Oswald"><tspan x="0" y="0">STEP</tspan></text>
+  </g>
+</svg>

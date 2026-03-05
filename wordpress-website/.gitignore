@@ -1,0 +1,20 @@
+# Environment variables (FTP credentials)
+.env
+
+# Utility scripts
+ftp_download.py
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# WordPress error logs
+error_log
+
+# Large binary assets (optional - uncomment if repo gets too big)
+# *.jpg
+# *.jpeg
+# *.png
+# *.webp
+# *.woff
+# *.woff2

@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700;1,900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    outline:0 !important;
+    box-shadow:none !important;
+}
+
+body.login {
+    background: #303137;
+    font-family: 'Arial', sans-serif;
+}
+
+.login h1 {
+    background: #fff;
+    width: 150px;
+    margin: 0 auto;
+    padding: 5px 20px;
+    height: 80px;
+    border-radius: 5px;
+}
+
+#login h1 a, .login h1 a {
+    background-image: url(logo.png) !important;
+    background-repeat: no-repeat;
+    padding-bottom: 0;
+    height: 80px;
+    margin: 0 auto 40px;
+    background-size: contain;
+    width: auto;
+}
+
+.login form {
+    margin-top: 20px;
+    margin-left: 0;
+    padding: 0 0 50px;
+    font-weight: 400;
+    overflow: hidden;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+.login-copyright {
+    background-image: url(logo-pixelchefs.png) !important;
+    background-repeat: no-repeat;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 199px;
+    height: 55px;
+    font-size: 0px;
+    background-size: contain;
+    opacity: 1;
+}
+
+#login {
+    width: 435px;
+}
+
+.login form .input, .login input[type=text] {
+    background: #fff;
+    height: 55px;
+    padding: 0 20px;
+    font-size: 18px;
+    border-radius: 0px;
+	border: none;
+}
+
+.login label {
+    font-size: 14px;
+    color: #fff;
+    line-height: 23px;
+    display: block;
+    font-weight: bold;
+}
+
+.login .submit input {
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+    color: #fff;
+    text-shadow: none;
+    font-size: 17px;
+    text-transform: uppercase;
+    width: 120px;
+    padding: 0 20px;
+    height: 40px;
+    min-height: 45px;
+    margin-top: 5px;
+    border-radius: 0px;
+    background: #AC1D28 !important;
+    color: #fff;
+    font-weight: 400;
+    font-family: Oswald, sans-serif;
+    box-shadow: 0px 10px 15px 0px rgb(0 0 0 / 30%);
+}
+
+body.login .button.wp-hide-pw {
+    height: 56px;
+    color: #ddd;
+}
+
+body.login form .forgetmenot {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 10px;
+}
+
+.login .submit input:hover {
+    background: #AC1D28 !important;
+    color: #fff;
+}
+
+.login input[type=checkbox] {
+    background: transparent;
+	border: 1px solid #ddd;
+    margin-right: 9px;
+}
+
+.login #nav {
+    margin: -26px 0 0;
+    display: table;
+    float: right;
+}
+
+.login #backtoblog a:focus,
+.login #nav a:focus,
+.login #backtoblog a,
+.login #nav a {
+    color: #fff;
+}
+
+.login #backtoblog a:hover,
+.login #nav a:hover {
+    color: #c9a875
+}
+
+.login #backtoblog, .login #nav {
+    padding: 0 !important;
+    font-size: 14px;
+}
+
+.login #backtoblog {
+    margin-top: -27px;
+}
+
+.login #login_error {
+    border: none;
+    margin: 25px 0px 0px;
+    background: transparent;
+    color: #fff;
+    text-align: center;
+    border: 2px solid #eee;
+    font-size: 14px;
+}
+
+.login .success a,
+.login .message a,
+.login #login_error a {
+    color: #fff;
+}
+
+.login .message {
+    border: none;
+    margin: 25px 0px 0px;
+    background: transparent;
+    color: #fff;
+    text-align: center;
+    border: 2px solid #eee;
+    font-size: 14px;
+    padding: 8px 20px;
+}
+
+.login .success {
+    border: none;
+    margin: 25px 26px -20px;
+    text-align: center;
+    background: transparent;
+    color: #fff;
+    text-align: center;
+    border: 2px solid #eee;
+    font-size: 14px;
+    padding: 8px 20px;
+}
