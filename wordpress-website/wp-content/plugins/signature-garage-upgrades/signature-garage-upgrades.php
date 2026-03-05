@@ -36,13 +36,12 @@ add_action('admin_notices', function () {
 add_action('init', function () {
     SGU_Logger::init();
     SGU_Image_Hooks::init();
-    SGU_Logger::info('core', 'Plugin initialized', ['version' => SGU_VERSION]);
+    SGU_Logger::debug('core', 'Plugin initialized', ['version' => SGU_VERSION]);
 });
 
-add_action('admin_init', function () {
-    SGU_Admin::init();
-    SGU_Image_Bulk::init();
-});
+// Admin UI + AJAX handlers (must hook before admin_menu fires)
+SGU_Admin::init();
+SGU_Image_Bulk::init();
 
 // Activation: add WebP rewrite rules to .htaccess
 register_activation_hook(__FILE__, function () {
