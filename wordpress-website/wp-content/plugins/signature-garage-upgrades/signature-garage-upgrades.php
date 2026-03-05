@@ -24,6 +24,7 @@ require_once SGU_PLUGIN_DIR . 'includes/class-sgu-image-optimizer.php';
 require_once SGU_PLUGIN_DIR . 'includes/class-sgu-admin.php';
 require_once SGU_PLUGIN_DIR . 'includes/class-sgu-image-hooks.php';
 require_once SGU_PLUGIN_DIR . 'includes/class-sgu-image-bulk.php';
+require_once SGU_PLUGIN_DIR . 'includes/class-sgu-admin-organizer.php';
 
 // GD check notice
 add_action('admin_notices', function () {
@@ -42,6 +43,7 @@ add_action('init', function () {
 // Admin UI + AJAX handlers (must hook before admin_menu fires)
 SGU_Admin::init();
 SGU_Image_Bulk::init();
+SGU_Admin_Organizer::init();
 
 // Activation: add WebP rewrite rules to .htaccess
 register_activation_hook(__FILE__, function () {
