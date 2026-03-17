@@ -666,7 +666,7 @@
         /* ── ROLE CARDS ─────────────────────── */
         .roles-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 16px;
             margin: 24px 0;
         }
@@ -675,9 +675,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
-            margin: 0 auto;
             margin-top: 16px;
-            max-width: 66.666%;
         }
 
         .role-card {
@@ -1051,7 +1049,7 @@
 
             .pain-grid { grid-template-columns: 1fr; }
             .roles-grid { grid-template-columns: 1fr; }
-            .roles-grid-bottom { grid-template-columns: 1fr; max-width: 100%; }
+            .roles-grid-bottom { grid-template-columns: 1fr; }
             .phase-items { columns: 1; }
 
             .scope-card { padding: 16px 18px; gap: 0; position: relative; }
@@ -1082,7 +1080,7 @@
             .mod-list { display: block !important; }
             .pain-grid { grid-template-columns: 1fr; }
             .roles-grid { grid-template-columns: 1fr; }
-            .roles-grid-bottom { grid-template-columns: 1fr; max-width: 100%; }
+            .roles-grid-bottom { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1165,7 +1163,7 @@
                 <h2><span class="num">1.</span> Resumen Ejecutivo</h2>
 
                 <p>
-                    Signature Garage es una automotora boutique en Punta del Este especializada en vehiculos premium, deportivos y clasicos. Opera en tres lineas de negocio: <strong>taller mecanico</strong> (~30-40 vehiculos mensuales), <strong>guarderia de vehiculos</strong> (~40 autos) y <strong>venta de usados</strong>. Con la mudanza al local nuevo, el volumen de operacion va a crecer y el metodo actual &mdash;papeles, WhatsApp y memoria&mdash; no escala.
+                    Signature Garage es una automotora boutique en Punta del Este especializada en vehiculos premium, deportivos y clasicos. Opera en tres lineas de negocio: <strong>taller mecanico</strong> (~30-40 vehiculos mensuales), <strong>guarderia de vehiculos</strong> (~38 autos) y <strong>venta de usados</strong>. Con la mudanza al local nuevo, el volumen de operacion va a crecer y el metodo actual &mdash;papeles, WhatsApp y memoria&mdash; no escala.
                 </p>
 
                 <p>
@@ -1277,8 +1275,8 @@
                     <div class="scope-card">
                         <div class="card-ico">&#128274;</div>
                         <div class="card-body">
-                            <strong>Cinco roles con permisos estrictos</strong>
-                            <span>Mecanico (no ve plata), Jefe de Taller (ve metricas y numeros del taller), Administracion (gestiona numeros y compras), Comercial (ve todo de ventas), Socio/Director (ve todo y configura).</span>
+                            <strong>Cuatro roles con permisos estrictos</strong>
+                            <span>Mecanico (no ve plata), Administracion (gestiona numeros, compras y metricas del taller), Comercial (ve todo de ventas), Socio/Director (ve todo y configura). Si el jefe de taller necesita ver metricas, entra con rol de Administracion.</span>
                         </div>
                     </div>
                 </div>
@@ -1332,7 +1330,7 @@
                         <div class="flow-body">
                             <div class="who">Admin / Encargado</div>
                             <h4>Creacion de la orden</h4>
-                            <p>Alguien detecta que un auto necesita algo: un cliente llama, un auto de guarderia tiene un servicio vencido, un auto de venta necesita preparacion. Se crea la orden con un <strong>motivo obligatorio</strong> que se desglosa en tareas individuales (checklist). Se asigna prioridad por semaforo: rojo (urgente), amarillo (importante), verde (puede esperar). Si el cliente entrega dinero por adelantado, se registra.</p>
+                            <p>Alguien detecta que un auto necesita algo: un cliente llama, un auto de guarderia tiene un servicio vencido, un auto de venta necesita preparacion. Se crea la orden con un <strong>motivo obligatorio</strong> que se desglosa en tareas individuales (checklist). Se asigna prioridad por semaforo: rojo (urgente), amarillo (importante), verde (puede esperar). La prioridad es <strong>editable en todo momento por Admin/Socios</strong> &mdash; un amarillo puede escalar a rojo segun evolucione la situacion. Si el cliente entrega dinero por adelantado, se registra.</p>
                         </div>
                     </div>
                     <div class="flow-step">
@@ -1348,7 +1346,7 @@
                         <div class="flow-body">
                             <div class="who">Taller</div>
                             <h4>Ingreso e inspeccion</h4>
-                            <p>El auto llega al taller. La app guia al mecanico paso a paso: <strong>fotos obligatorias</strong> del vehiculo (frente, costados, trasera, interior, detalle de roturas) e <strong>inspeccion electronica</strong> segun el tipo de vehiculo: si es un auto moderno, se sube el PDF del scanner OBD que registra todas las fallas existentes; si es un auto veterano o clasico, se carga el resultado del testeo de bateria con scanner. Esto protege al taller de reclamos futuros. Si ninguna inspeccion electronica aplica, se pide justificacion. En esta etapa el vehiculo esta fisicamente en SG, por lo que <strong>no se asigna ubicacion</strong> &mdash; se registrara recien cuando el vehiculo salga a un tercero. Al completar, pasa automaticamente a "En Proceso".</p>
+                            <p>El auto llega al taller. La app guia al mecanico paso a paso: <strong>fotos obligatorias</strong> del vehiculo (frente, costados, trasera, interior, detalle de roturas) e <strong>inspeccion electronica</strong> segun el tipo de vehiculo: si es un auto moderno, se sube el PDF del scanner OBD que registra todas las fallas existentes; si es un auto veterano o clasico, se carga el resultado del testeo de bateria con scanner. Esto protege al taller de reclamos futuros. Si ninguna inspeccion electronica aplica, se pide justificacion. Se asigna la <strong>ubicacion inicial</strong> del vehiculo (en SG). La ubicacion se actualizara cuando el vehiculo salga a un tercero. Al completar, pasa automaticamente a "En Proceso".</p>
                         </div>
                     </div>
                     <div class="flow-step">
@@ -1358,7 +1356,7 @@
                             <h4>En proceso</h4>
                             <p>El mecanico ve su cola de trabajos por semaforo. Abre un trabajo, ve el checklist y trabaja: <strong>carga horas</strong>, <strong>registra diagnosticos</strong>, <strong>carga insumos</strong>, <strong>solicita repuestos</strong>, <strong>marca items como completados</strong>. En paralelo, administracion recibe solicitudes de repuestos, cotiza, encarga, registra costos y puede enviar presupuestos al cliente para aprobar trabajos adicionales.</p>
                             <p>Cuando se necesita verificar el trabajo realizado, el mecanico registra <strong>pruebas de ruta</strong> (cortas o largas) con fecha, hora y operario responsable.</p>
-                            <p>Cuando llegan facturas de proveedores externos (escapero, tapicero, electricista), administracion las carga directamente contra la orden con monto, proveedor, descripcion e IVA. Estos costos son visibles solo para admin y socios &mdash; el taller no ve los montos negociados con proveedores externos.</p>
+                            <p>Cuando llegan facturas de proveedores externos (escapero, tapicero, electricista), administracion las carga directamente contra la orden con monto, proveedor, descripcion e IVA. El taller ve la <strong>descripcion del trabajo y el proveedor</strong>, pero no los montos. Admin y socios ven todo: descripcion, proveedor, monto e IVA.</p>
                             <p>Si por algun trabajo tercerizado el vehiculo sale de SG, se registra la nueva ubicacion con fecha y hora. La ubicacion puede cambiar varias veces dentro de una misma orden &mdash; el auto puede ir a un tapicero, volver, ir a un escapero, volver, o incluso volver a un proveedor por un reclamo. Cada movimiento queda registrado con timestamp. Cuando la ubicacion es un proveedor externo, el sistema calcula automaticamente cuanto tiempo estuvo el vehiculo ahi, lo que permite medir y comparar tiempos de respuesta de cada proveedor.</p>
                         </div>
                     </div>
@@ -1375,7 +1373,7 @@
                         <div class="flow-body">
                             <div class="who">Mecanico &rarr; Admin</div>
                             <h4>Cierre de taller</h4>
-                            <p>El mecanico presiona "Cerrar". Si todos los items estan completados, agrega observaciones y cierra. Si hay items pendientes, debe justificar cada uno: "No se encuentra repuesto", "Cliente no acepta presupuesto", "No es para SG", "Demora en importacion", "Reagenda" u "Otros". Los dos ultimos <strong>generan automaticamente un nuevo trabajo</strong> vinculado al anterior. La orden queda bloqueada y se notifica a admin.</p>
+                            <p>El mecanico presiona "Cerrar". Si todos los items estan completados, agrega observaciones y cierra. Si hay items pendientes, debe justificar cada uno: "No se encuentra repuesto", "Cliente no acepta presupuesto", "No es para SG", "Demora en importacion", "Reagenda" u "Otros". <strong>"Demora en importacion" y "Reagenda" generan automaticamente un nuevo trabajo</strong> vinculado al anterior. "Otros" requiere texto obligatorio de justificacion pero no genera trabajo nuevo automaticamente. Los tres primeros cierran el item sin generar trabajo nuevo. La orden queda bloqueada y se notifica a admin.</p>
                         </div>
                     </div>
                     <div class="flow-step">
@@ -1383,8 +1381,8 @@
                         <div class="flow-body">
                             <div class="who">Admin / Socios</div>
                             <h4>Facturacion</h4>
-                            <p>Admin ve el resumen de costos, define cuantas <strong>horas se facturan</strong>, aplica <strong>margenes</strong>, ajusta montos y genera <strong>PDF de la cuenta</strong> o un <strong>link trackeable</strong> para el cliente. Si falta algo puede <strong>reabrir</strong> la orden al taller.</p>
-                            <p>El sistema preserva ambos numeros por separado: las horas que el taller realmente trabajo y las horas que se le cobran al cliente. La diferencia entre ambas es un indicador clave de eficiencia. Si el taller trabajo 100 horas y solo se facturan 70, esas 30 horas de diferencia quedan registradas para analisis &mdash; pueden ser ineficiencia, cortesia, o trabajo comercial no cobrable.</p>
+                            <p>Admin ve el resumen de costos y puede <strong>marcar item por item</strong> lo que se factura al cliente y lo que no. Lo que se factura se incluye en la cuenta; lo que NO se factura se cierra automaticamente en una <strong>nueva orden asignada al cargo interno</strong> correspondiente (cortesia, error de taller, uso de socios, etc.). Define cuantas <strong>horas se facturan</strong>, aplica <strong>margenes</strong>, ajusta montos y genera <strong>PDF de la cuenta</strong> o un <strong>link trackeable</strong> para el cliente. Si falta algo puede <strong>reabrir</strong> la orden al taller.</p>
+                            <p>El sistema preserva ambos numeros por separado: las horas que el taller realmente trabajo y las horas que se le cobran al cliente. Cuando hay diferencia entre horas trabajadas y horas facturadas, o cuando cualquier item (horas, insumos, repuestos, servicios tercerizados) se marca como no cobrable, la aplicacion <strong>obliga a categorizar esa diferencia</strong>. Categorias: <strong>Ineficiencia</strong>, <strong>Cortesia</strong>, <strong>Error de taller</strong>, <strong>Uso de socios</strong>, <strong>Ventas</strong>. Esta categorizacion es obligatoria y aplica a todos los tipos de costo, no solo horas. Es la base de los reportes de eficiencia y cargos internos.</p>
                         </div>
                     </div>
                     <div class="flow-step">
@@ -1407,7 +1405,8 @@
                     <li><strong>Ventas</strong> &mdash; preparacion mecanica de autos destinados a venta</li>
                     <li><strong>Cortesia</strong> &mdash; trabajos que se regalan al cliente por gesto comercial</li>
                 </ul>
-                <p>Estas ordenes siguen el mismo flujo completo pero no se facturan a un cliente externo. Las horas y costos quedan registrados y separados, lo que permite medir: cuantas horas productivas tiene el taller vs. cuantas se destinan a retrabajos, uso interno o cortesias. Es la base para evaluar la eficiencia real del taller y detectar problemas sistematicos (ej: demasiados reclamos, demasiado uso personal).</p>
+                <p>Estas ordenes siguen el mismo flujo completo pero no se facturan a un cliente externo. Las horas y costos quedan registrados y separados, lo que permite medir: cuantas horas productivas tiene el taller vs. cuantas se destinan a retrabajos, uso interno o cortesias. Es la base para evaluar la eficiencia real del taller y detectar problemas sistematicos (ej: demasiados reclamos, demasiado uso personal). Ademas de crearse como ordenes independientes, los cargos internos tambien pueden generarse por <strong>split durante la facturacion</strong>: cuando admin marca items como no cobrables al cliente, estos se separan automaticamente en una nueva orden asignada al cargo interno correspondiente.</p>
+                <p><strong>Ordenes Administrativas (sin taller):</strong> Hay trabajos donde el auto <strong>no entra a taller</strong>. Ejemplo: un cliente pide un repuesto de importacion, no trae el vehiculo. Administracion abre la orden, gestiona el repuesto, y cuando llega se entrega y factura. Estas ordenes las abre y cierra Administracion directamente, no tienen horas de taller, tienen un <strong>checklist propio</strong> definido al inicio (ej: "importar pieza X", "coordinar entrega"), se visualizan en un <strong>carril separado</strong> para no mezclarse con ordenes de taller, y la facturacion funciona igual que una orden normal. La inspeccion se justifica como "el auto no entro a taller".</p>
             </div>
 
             <hr class="section-divider">
@@ -1438,6 +1437,7 @@
                                 <li>Cierre con todos los items resueltos o justificados</li>
                                 <li>Generacion automatica de nueva orden si quedan pendientes por importacion o reagenda</li>
                                 <li>Bloqueo total al cerrar; solo admin puede reabrir</li>
+                                <li>Ordenes administrativas (sin taller): admin abre y cierra, carril separado</li>
                             </ul>
                         </div>
                         <div class="mod">
@@ -1449,7 +1449,7 @@
                                 <li>Auto moderno: PDF del scanner OBD con fallas existentes al ingreso</li>
                                 <li>Auto veterano/clasico: testeo de bateria con scanner</li>
                                 <li>Si no aplica ninguna inspeccion electronica, justificacion obligatoria</li>
-                                <li>Ubicacion no se asigna en ingreso (el vehiculo esta en SG)</li>
+                                <li>Asignar ubicacion inicial del vehiculo (en SG)</li>
                             </ul>
                         </div>
                         <div class="mod">
@@ -1475,15 +1475,13 @@
                         </div>
                         <div class="mod">
                             <div class="mod-name">Pruebas de Ruta</div>
-                            <div class="mod-for">&#128100; Mecanico, Jefe de Taller</div>
-                            <p class="mod-desc">Registro de salidas a probar el vehiculo en ruta. Dos tipos: prueba corta (vuelta al barrio, verificacion basica) y prueba larga (ruta extendida, verificacion en condiciones reales). Cada prueba registra fecha y hora de salida y regreso, tipo, operario y observaciones. Puede haber multiples pruebas de ruta en una misma orden. Queda registro de cuando se saco el auto, quien lo saco y por cuanto tiempo.</p>
+                            <div class="mod-for">&#128100; Mecanico</div>
+                            <p class="mod-desc">Registro tipo log de salidas a probar el vehiculo. Se define el tipo (corta o larga, con recorrido ya conocido), se marca la salida y queda registrado quien saco el auto y en que momento. Multiples pruebas por orden.</p>
                             <ul class="feat-list">
                                 <li>Tipo: prueba corta / prueba larga</li>
-                                <li>Fecha y hora de inicio y fin</li>
+                                <li>Fecha y hora de salida</li>
                                 <li>Operario que realiza la prueba</li>
                                 <li>Observaciones</li>
-                                <li>Multiples pruebas por orden</li>
-                                <li>Calculo automatico de duracion</li>
                             </ul>
                         </div>
                         <div class="mod">
@@ -1533,9 +1531,10 @@
                         <div class="mod">
                             <div class="mod-name">Servicios Tercerizados</div>
                             <div class="mod-for">&#128100; Admin</div>
-                            <p class="mod-desc">Trabajos que se mandan afuera: escapero, tapicero, electricista. Con costo, proveedor e IVA. Se integra en la cuenta.</p>
+                            <p class="mod-desc">Trabajos que se mandan afuera: escapero, tapicero, electricista. Con costo, proveedor e IVA. Se integra en la cuenta. Vista dual: el taller necesita saber que el trabajo tercerizado existe para validar que todo esta hecho antes de cerrar.</p>
                             <ul class="feat-list">
-                                <li>Carga exclusiva de administracion (el taller no ve costos de proveedores)</li>
+                                <li>Taller ve: descripcion del trabajo + proveedor (sin montos)</li>
+                                <li>Admin/Socios ven: descripcion + proveedor + monto + IVA</li>
                                 <li>Factura del proveedor asociada a la orden</li>
                                 <li>Registro de IVA por transaccion</li>
                             </ul>
@@ -1565,6 +1564,9 @@
                             <p class="mod-desc">Admin recibe el trabajo cerrado, ajusta numeros, genera cuenta. Resuelve la facturacion manual y la falta de control sobre margenes.</p>
                             <ul class="feat-list">
                                 <li>Resumen automatico de costos del trabajo</li>
+                                <li>Seleccion item por item de lo que se factura al cliente</li>
+                                <li>Items no facturados generan nueva orden en cargo interno correspondiente (split)</li>
+                                <li>Categorizacion obligatoria de costos no facturados: Ineficiencia, Cortesia, Error de taller, Uso de socios, Ventas</li>
                                 <li>Horas facturables editables (independientes de las del taller)</li>
                                 <li>Margenes configurables: valor hora, % repuestos, % servicios</li>
                                 <li>Descuentos, cortesias y ajustes por item</li>
@@ -1594,8 +1596,8 @@
                     <div class="mod-list">
                         <div class="mod">
                             <div class="mod-name">Gestion de Guarderia</div>
-                            <div class="mod-for">&#128100; Admin, Socios</div>
-                            <p class="mod-desc">Control de ~40 autos almacenados. Resuelve el manejo de memoria de pagos, servicios y estado de cada vehiculo.</p>
+                            <div class="mod-for">&#128100; Socios (gestion principal), Admin (operativo)</div>
+                            <p class="mod-desc">Control de ~38 autos almacenados. Resuelve el manejo de memoria de pagos, servicios y estado de cada vehiculo.</p>
                             <ul class="feat-list">
                                 <li>Pagos mensuales: quien esta al dia, quien no</li>
                                 <li>Semaforo de servicios: verde (al dia), amarillo (proximo), rojo (vencido)</li>
@@ -1671,6 +1673,7 @@
                                 <li>Solicitar repuestos</li>
                                 <li>Cargar insumos y materiales</li>
                                 <li>Registrar pruebas de ruta (corta y larga)</li>
+                                <li>Ver servicios tercerizados cargados (descripcion y proveedor, sin montos)</li>
                                 <li>Cerrar la orden con validacion</li>
                                 <li>Fotos de ingreso y scanner/testeo bateria</li>
                                 <li>Cambiar ubicacion del vehiculo</li>
@@ -1687,34 +1690,6 @@
 
                     <div class="role-card">
                         <div class="role-card-header">
-                            <div class="role-avatar">&#127981;</div>
-                            <div class="role-info">
-                                <h4>Jefe de Taller</h4>
-                                <span>Supervisa la operacion del taller</span>
-                            </div>
-                        </div>
-                        <div class="role-card-body">
-                            <div class="role-section-label">Puede</div>
-                            <ul class="can">
-                                <li>Todo lo del mecanico</li>
-                                <li>Ver metricas del taller: horas, tiempos, carga por operario</li>
-                                <li>Ver numeros del taller (costos de horas, insumos)</li>
-                                <li>Vista global de todos los trabajos y su estado</li>
-                                <li>Ver tiempos de repuestos pendientes</li>
-                                <li>Reportes de rendimiento del taller</li>
-                            </ul>
-                            <div class="role-section-label">No puede</div>
-                            <ul class="cant">
-                                <li>Ver margenes de facturacion ni precios al cliente</li>
-                                <li>Modificar costos de repuestos o servicios tercerizados</li>
-                                <li>Acceder a facturacion ni gestion de cobros</li>
-                                <li>Configurar parametros del sistema</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="role-card">
-                        <div class="role-card-header">
                             <div class="role-avatar">&#128203;</div>
                             <div class="role-info">
                                 <h4>Administracion</h4>
@@ -1724,7 +1699,7 @@
                         <div class="role-card-body">
                             <div class="role-section-label">Puede</div>
                             <ul class="can">
-                                <li>Todo lo del Jefe de Taller (lectura)</li>
+                                <li>Todo lo del Mecanico + metricas del taller (horas, tiempos, carga por operario)</li>
                                 <li>Gestionar repuestos completos (cotizar, encargar, recibir)</li>
                                 <li>Cargar costos, facturas de proveedores y servicios tercerizados</li>
                                 <li>Registrar adelantos y pagos</li>
@@ -1817,7 +1792,7 @@
                         </div>
                     </div>
                     <ul class="phase-items">
-                        <li>Login con roles (Mecanico, Jefe de Taller, Admin, Comercial, Director)</li>
+                        <li>Login con roles (Mecanico, Admin, Comercial, Director)</li>
                         <li>Ficha de vehiculos, clientes, ubicaciones, proveedores</li>
                         <li>Ordenes de Trabajo con 8 estados</li>
                         <li>Checklist con validacion al cierre</li>
@@ -1848,6 +1823,8 @@
                         <li>PDF de cuenta</li>
                         <li>Pendientes de cobro</li>
                         <li>Generacion automatica de nuevo trabajo al cierre</li>
+                        <li>Split de facturacion: items no cobrados generan orden en cargo interno</li>
+                        <li>Categorizacion obligatoria de costos no facturados</li>
                         <li>Configuracion de margenes</li>
                     </ul>
                 </div>
