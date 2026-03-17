@@ -891,6 +891,138 @@
             opacity: 0.85;
         }
 
+        /* ── TABLE ─────────────────────────── */
+        .inv-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.93rem;
+        }
+
+        .inv-table th,
+        .inv-table td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .inv-table th {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: var(--bg-alt);
+        }
+
+        .inv-table td {
+            color: var(--text-secondary);
+        }
+
+        .inv-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .inv-table tr.total td {
+            font-weight: 700;
+            color: var(--text);
+            border-top: 2px solid var(--red);
+            border-bottom: none;
+            font-size: 1rem;
+        }
+
+        /* ── TECH CARDS ────────────────────── */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .tech-card {
+            padding: 22px 24px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .tech-card:hover {
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .tech-card .tech-ico {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .tech-card strong {
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .tech-card span {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ── STEPS (Proximos Pasos) ────────── */
+        .next-steps {
+            counter-reset: step;
+            margin: 24px 0;
+        }
+
+        .next-step {
+            display: flex;
+            gap: 18px;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border-light);
+            align-items: flex-start;
+        }
+
+        .next-step:last-child { border-bottom: none; }
+
+        .next-step::before {
+            counter-increment: step;
+            content: counter(step);
+            width: 36px;
+            height: 36px;
+            background: var(--red);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.82rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .next-step p {
+            margin: 0;
+            padding-top: 6px;
+        }
+
+        /* ── INCLUDES LIST ─────────────────── */
+        .includes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .includes-grid .feat-list { margin: 0; }
+
+        @media (max-width: 900px) {
+            .tech-grid { grid-template-columns: 1fr; }
+            .includes-grid { grid-template-columns: 1fr; }
+        }
+
         /* ── FOOTER ─────────────────────────── */
         .doc-footer {
             margin-top: 80px;
@@ -1121,12 +1253,11 @@
             <a href="#modulos" onclick="closeMobileMenu()"><span class="ico">&#128230;</span> Modulos y Funcionalidades</a>
             <a href="#roles" onclick="closeMobileMenu()"><span class="ico">&#128101;</span> Roles de Usuario</a>
         </nav>
-        <span class="mobile-menu-label">Pendiente de validacion</span>
         <nav>
-            <a href="#fases" onclick="closeMobileMenu()"><span class="ico">&#128197;</span> Fases de Entrega <span class="pending-dot"></span></a>
-            <a href="#inversion" onclick="closeMobileMenu()"><span class="ico">&#128176;</span> Inversion <span class="pending-dot"></span></a>
-            <a href="#tecnico" onclick="closeMobileMenu()"><span class="ico">&#128274;</span> Consideraciones Tecnicas <span class="pending-dot"></span></a>
-            <a href="#pasos" onclick="closeMobileMenu()"><span class="ico">&#128640;</span> Proximos Pasos <span class="pending-dot"></span></a>
+            <a href="#fases" onclick="closeMobileMenu()"><span class="ico">&#128197;</span> Fases de Entrega</a>
+            <a href="#inversion" onclick="closeMobileMenu()"><span class="ico">&#128176;</span> Inversion</a>
+            <a href="#tecnico" onclick="closeMobileMenu()"><span class="ico">&#128274;</span> Consideraciones Tecnicas</a>
+            <a href="#pasos" onclick="closeMobileMenu()"><span class="ico">&#128640;</span> Proximos Pasos</a>
         </nav>
     </div>
 
@@ -1149,12 +1280,12 @@
                 <a href="#modulos"><span class="ico">&#128230;</span> Modulos y Funcionalidades</a>
                 <a href="#roles"><span class="ico">&#128101;</span> Roles de Usuario</a>
             </nav>
-            <span class="sidebar-label">Pendiente de validacion</span>
+            <span class="sidebar-label">Proyecto</span>
             <nav>
-                <a href="#fases"><span class="ico">&#128197;</span> Fases de Entrega <span class="pending-dot"></span></a>
-                <a href="#inversion"><span class="ico">&#128176;</span> Inversion <span class="pending-dot"></span></a>
-                <a href="#tecnico"><span class="ico">&#128274;</span> Consideraciones Tecnicas <span class="pending-dot"></span></a>
-                <a href="#pasos"><span class="ico">&#128640;</span> Proximos Pasos <span class="pending-dot"></span></a>
+                <a href="#fases"><span class="ico">&#128197;</span> Fases de Entrega</a>
+                <a href="#inversion"><span class="ico">&#128176;</span> Inversion</a>
+                <a href="#tecnico"><span class="ico">&#128274;</span> Consideraciones Tecnicas</a>
+                <a href="#pasos"><span class="ico">&#128640;</span> Proximos Pasos</a>
             </nav>
         </aside>
 
@@ -1803,23 +1934,41 @@
 
                 <div class="phase">
                     <div class="phase-head">
+                        <span class="phase-n">00</span>
+                        <div class="phase-info">
+                            <h4>Reserva y Diseno Visual</h4>
+                            <span class="time">Mes 0 &mdash; Arranque del proyecto</span>
+                        </div>
+                    </div>
+                    <p style="font-size:0.92rem; color:var(--text-secondary); margin: 0 0 12px;">Arranca el proyecto. Se disenan las pantallas principales de la aplicacion (mockups visuales) para que Signature Garage vea como va a funcionar todo antes de escribir una linea de codigo. Se validan flujos, se ajustan detalles y se confirma que lo que se va a construir es exactamente lo que se necesita.</p>
+                    <ul class="phase-items">
+                        <li>Diseno visual de las pantallas principales (mockups interactivos)</li>
+                        <li>Validacion del flujo completo con Signature Garage</li>
+                        <li>Ajustes en base al feedback antes de empezar a construir</li>
+                        <li>Definicion de accesos, usuarios iniciales y datos de arranque</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-head">
                         <span class="phase-n">01</span>
                         <div class="phase-info">
                             <h4>MVP &mdash; Operacion del Taller</h4>
-                            <span class="time">Que el taller pueda operar y no se escape nada</span>
+                            <span class="time">Mes 1 &mdash; Que el taller pueda operar y no se escape nada</span>
                         </div>
                     </div>
                     <ul class="phase-items">
                         <li>Login con roles (Mecanico, Admin, Comercial, Director)</li>
                         <li>Ficha de vehiculos, clientes, ubicaciones, proveedores</li>
-                        <li>Ordenes de Trabajo con 8 estados</li>
+                        <li>Ordenes de Trabajo con flujo completo de estados</li>
                         <li>Checklist con validacion al cierre</li>
-                        <li>Prioridad por semaforo</li>
+                        <li>Prioridad por semaforo (editable por Admin/Socios)</li>
                         <li>Carga de horas (con operario) e insumos</li>
                         <li>Solicitud de repuestos con notificacion</li>
                         <li>Diagnostico mecanico</li>
                         <li>Inspeccion de ingreso (fotos + scanner/testeo bateria)</li>
-                        <li>Pruebas de ruta (corta y larga) con registro de operario</li>
+                        <li>Pruebas de ruta con registro de operario</li>
+                        <li>Ordenes administrativas (sin taller)</li>
                         <li>Cierre de taller con bloqueo</li>
                         <li>Vista de admin para facturacion basica</li>
                         <li>Ubicaciones con historial</li>
@@ -1831,18 +1980,18 @@
                         <span class="phase-n">02</span>
                         <div class="phase-info">
                             <h4>Completar Taller</h4>
-                            <span class="time">Repuestos, facturacion completa y cobros</span>
+                            <span class="time">Mes 2 &mdash; Repuestos, facturacion completa y control de cobros</span>
                         </div>
                     </div>
                     <ul class="phase-items">
-                        <li>Repuestos con 7 estados</li>
-                        <li>Servicios tercerizados</li>
+                        <li>Repuestos con 7 estados (desde solicitud hasta instalacion)</li>
+                        <li>Servicios tercerizados con vista dual (taller ve descripcion; admin ve montos)</li>
                         <li>Adelantos con transferencia automatica</li>
-                        <li>PDF de cuenta</li>
-                        <li>Pendientes de cobro</li>
-                        <li>Generacion automatica de nuevo trabajo al cierre</li>
+                        <li>PDF de cuenta y link de presupuesto trackeable</li>
+                        <li>Pendientes de cobro (vista consolidada)</li>
                         <li>Split de facturacion: items no cobrados generan orden en cargo interno</li>
                         <li>Categorizacion obligatoria de costos no facturados</li>
+                        <li>Generacion automatica de nuevo trabajo al cierre con pendientes</li>
                         <li>Configuracion de margenes</li>
                     </ul>
                 </div>
@@ -1851,15 +2000,18 @@
                     <div class="phase-head">
                         <span class="phase-n">03</span>
                         <div class="phase-info">
-                            <h4>Guarderia</h4>
-                            <span class="time">Control de almacenamiento y servicios periodicos</span>
+                            <h4>Guarderia + CRM</h4>
+                            <span class="time">Mes 3 &mdash; Control de almacenamiento, servicios periodicos y relacion con el cliente</span>
                         </div>
                     </div>
                     <ul class="phase-items">
-                        <li>Modulo de guarderia completo</li>
+                        <li>Modulo de guarderia completo (~38 autos)</li>
                         <li>Pagos mensuales con seguimiento</li>
-                        <li>Semaforo de servicios periodicos</li>
-                        <li>Generar ordenes de taller desde guarderia</li>
+                        <li>Semaforo de servicios periodicos (por tiempo, no por km)</li>
+                        <li>Generar ordenes de taller desde la ficha de guarderia</li>
+                        <li>Base de datos de clientes con cumpleanos y ultimo servicio</li>
+                        <li>QR con historial para el cliente</li>
+                        <li>Notificaciones automatizadas (email)</li>
                     </ul>
                 </div>
 
@@ -1867,38 +2019,36 @@
                     <div class="phase-head">
                         <span class="phase-n">04</span>
                         <div class="phase-info">
-                            <h4>CRM y Cliente</h4>
-                            <span class="time">Relacion con el cliente y acceso QR</span>
+                            <h4>Ajustes, Reportes y Estabilizacion</h4>
+                            <span class="time">Mes 4 &mdash; Pulir todo y dejar el sistema listo para operar solo</span>
                         </div>
                     </div>
                     <ul class="phase-items">
-                        <li>CRM con cumpleanos y ultimo servicio</li>
-                        <li>QR con historial para el cliente</li>
-                        <li>Link de presupuesto trackeable</li>
-                        <li>Notificaciones automatizadas</li>
+                        <li>Reportes de eficiencia: horas trabajadas vs. facturadas</li>
+                        <li>Reportes de cargos internos por categoria</li>
+                        <li>Costos por vehiculo y gasto por proveedor</li>
+                        <li>Ajustes y mejoras en base al uso real de los primeros meses</li>
+                        <li>Capacitacion del equipo</li>
+                        <li>Documentacion de uso</li>
                     </ul>
                 </div>
 
                 <div class="phase">
                     <div class="phase-head">
-                        <span class="phase-n">05</span>
+                        <span class="phase-n" style="font-size:1.2rem;">&#8734;</span>
                         <div class="phase-info">
                             <h4>Evolucion Continua</h4>
-                            <span class="time">Mejoras segun uso real y necesidades</span>
+                            <span class="time">Post-entrega &mdash; Mejoras segun uso real. Se cotizan por separado.</span>
                         </div>
                     </div>
                     <ul class="phase-items">
                         <li>Reportes avanzados</li>
-                        <li>Pasarela de pago</li>
+                        <li>Pasarela de pago (MercadoPago o tarjeta)</li>
                         <li>Publicacion web de vehiculos</li>
-                        <li>Automatizacion WhatsApp</li>
-                        <li>Modo offline</li>
+                        <li>Automatizacion de WhatsApp</li>
+                        <li>Modo offline para mecanicos</li>
                         <li>Integracion con GNS</li>
                     </ul>
-                </div>
-
-                <div class="callout yellow">
-                    <p><strong>Tiempos de desarrollo pendientes de validacion.</strong> La duracion estimada de cada fase se definira una vez validado el alcance funcional del presente documento por parte de Signature Garage.</p>
                 </div>
             </div>
 
@@ -1910,10 +2060,48 @@
             <div class="section">
                 <span class="anchor" id="inversion"></span>
                 <h2><span class="num">7.</span> Inversion</h2>
-                <div class="pending-banner">
-                    <div class="icon">&#9202;</div>
-                    <h3>Pendiente validacion de Signature Garage</h3>
-                    <p>El detalle de inversion (costo por fase, forma de pago y mantenimiento mensual) se presentara una vez validado el alcance funcional.</p>
+
+                <h3>Desarrollo del proyecto</h3>
+                <table class="inv-table">
+                    <thead>
+                        <tr><th>Concepto</th><th>Monto</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Reserva de inicio (Mes 0 &mdash; diseno visual y validacion)</td><td>$1.500 USD</td></tr>
+                        <tr><td>Mes 1 &mdash; MVP: Operacion del Taller</td><td>$3.375 USD</td></tr>
+                        <tr><td>Mes 2 &mdash; Completar Taller</td><td>$3.375 USD</td></tr>
+                        <tr><td>Mes 3 &mdash; Guarderia + CRM</td><td>$3.375 USD</td></tr>
+                        <tr><td>Mes 4 &mdash; Ajustes, Reportes y Estabilizacion</td><td>$3.375 USD</td></tr>
+                        <tr class="total"><td>Total del proyecto</td><td>$15.000 USD</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Calendario de pagos</h3>
+                <p>La reserva se abona al confirmar el proyecto. El desarrollo comienza a los 30 dias del pago de la reserva. A partir de ahi, los cuatro pagos restantes se abonan cada 30 dias al inicio de cada mes de desarrollo.</p>
+
+                <h3>Que incluye</h3>
+                <ul class="feat-list">
+                    <li>Diseno visual completo (mockups) para validacion</li>
+                    <li>Desarrollo de las 4 fases funcionales</li>
+                    <li>Deploy en servidor de produccion</li>
+                    <li>Configuracion de dominio, emails y almacenamiento de archivos</li>
+                    <li>Capacitacion del equipo para usar la aplicacion</li>
+                    <li>Soporte y ajustes durante todo el periodo de desarrollo</li>
+                </ul>
+
+                <h3>Mantenimiento mensual (post-entrega)</h3>
+                <p>Una vez entregado el proyecto, la aplicacion necesita estar funcionando, actualizada y con soporte ante cualquier necesidad. El mantenimiento mensual incluye:</p>
+                <ul class="feat-list">
+                    <li>Hosting del servidor y base de datos</li>
+                    <li>Almacenamiento de fotos y documentos</li>
+                    <li>Servicio de envio de emails (notificaciones)</li>
+                    <li>Actualizaciones de seguridad</li>
+                    <li>Soporte tecnico ante incidencias</li>
+                    <li>Pequenos ajustes y mejoras menores</li>
+                </ul>
+
+                <div class="callout red">
+                    <p><strong>Costo estimado: entre $150 y $200 USD/mes</strong>, dependiendo del volumen de uso. Se define al momento de la entrega final.</p>
                 </div>
             </div>
 
@@ -1925,10 +2113,53 @@
             <div class="section">
                 <span class="anchor" id="tecnico"></span>
                 <h2><span class="num">8.</span> Consideraciones Tecnicas</h2>
-                <div class="pending-banner">
-                    <div class="icon">&#9202;</div>
-                    <h3>Pendiente validacion de Signature Garage</h3>
-                    <p>Las consideraciones tecnicas (donde se aloja, tipo de aplicacion, seguridad de datos) se detallaran una vez validado el alcance funcional.</p>
+
+                <h3>Donde vive la aplicacion</h3>
+                <p>La aplicacion se aloja en un servidor en la nube (Railway), un servicio profesional disenado para aplicaciones web.</p>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <div class="tech-ico">&#9881;</div>
+                        <strong>Servidor de la aplicacion</strong>
+                        <span>Donde corre el sistema, accesible desde cualquier dispositivo con internet.</span>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-ico">&#128451;</div>
+                        <strong>Base de datos</strong>
+                        <span>Donde se guardan todos los datos del negocio (ordenes, clientes, vehiculos, historial). Con respaldo automatico diario.</span>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-ico">&#128247;</div>
+                        <strong>Almacenamiento de archivos</strong>
+                        <span>Las fotos de inspeccion, los PDFs del scanner y los documentos generados se guardan en un servicio seguro en la nube (Cloudinary).</span>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-ico">&#9993;</div>
+                        <strong>Envio de emails</strong>
+                        <span>Las notificaciones automaticas (diagnostico listo, cuenta enviada, servicio proximo) se envian por email a traves de un servicio dedicado (Resend).</span>
+                    </div>
+                </div>
+
+                <h3>Como se accede</h3>
+                <p>La aplicacion funciona como una <strong>web app progresiva</strong> (PWA). En la practica esto significa:</p>
+                <ul class="feat-list">
+                    <li>Se accede desde el navegador del celular, tablet o computadora &mdash; no requiere descarga de ninguna tienda</li>
+                    <li>Se puede "instalar" en la pantalla de inicio del celular y funciona como si fuera una app nativa</li>
+                    <li>Cada usuario entra con su usuario y contrasena, y ve solo lo que su rol le permite</li>
+                    <li>Funciona desde cualquier lugar con conexion a internet</li>
+                </ul>
+
+                <h3>Que pasa con los datos</h3>
+                <ul class="feat-list">
+                    <li>Todos los datos son <strong>propiedad exclusiva de Signature Garage</strong></li>
+                    <li>La base de datos tiene <strong>respaldo automatico diario</strong></li>
+                    <li>Las contrasenas se almacenan encriptadas</li>
+                    <li>Cada accion queda registrada con fecha, hora y usuario (trazabilidad completa)</li>
+                    <li>El codigo fuente se mantiene en un repositorio privado en GitHub, vinculado al servidor para actualizaciones automaticas</li>
+                </ul>
+
+                <h3>Que costo tiene la infraestructura</h3>
+                <div class="callout red">
+                    <p>El costo de mantener la aplicacion funcionando (servidor, base de datos, almacenamiento de fotos y documentos, envio de emails) es de <strong>$45 USD/mes</strong>. Este costo esta incluido dentro del mantenimiento mensual post-entrega.</p>
                 </div>
             </div>
 
@@ -1940,16 +2171,33 @@
             <div class="section">
                 <span class="anchor" id="pasos"></span>
                 <h2><span class="num">9.</span> Proximos Pasos</h2>
-                <div class="pending-banner">
-                    <div class="icon">&#9202;</div>
-                    <h3>Pendiente validacion de Signature Garage</h3>
-                    <p>Los proximos pasos (validacion, firma, primer pago, kickoff) se definiran una vez confirmado el alcance con el cliente.</p>
+
+                <div class="next-steps">
+                    <div class="next-step">
+                        <p><strong>Signature Garage valida</strong> este documento y confirma que refleja correctamente lo que se necesita.</p>
+                    </div>
+                    <div class="next-step">
+                        <p><strong>Se abona la reserva</strong> ($1.500 USD) para confirmar el inicio del proyecto.</p>
+                    </div>
+                    <div class="next-step">
+                        <p><strong>Arranca el Mes 0</strong> &mdash; diseno visual (mockups) para validar pantallas y flujos antes de construir.</p>
+                    </div>
+                    <div class="next-step">
+                        <p><strong>Se validan los mockups</strong> en conjunto y se ajustan hasta que esten confirmados.</p>
+                    </div>
+                    <div class="next-step">
+                        <p><strong>Comienza el desarrollo</strong> &mdash; Mes 1 con el MVP del taller, primer entregable funcional.</p>
+                    </div>
+                </div>
+
+                <div class="callout red">
+                    <p><strong>El objetivo es que al final del Mes 1, el taller ya pueda empezar a usar la aplicacion</strong> para registrar trabajos, cargar horas e insumos, y no perder mas nada.</p>
                 </div>
             </div>
 
             <!-- FOOTER -->
             <div class="doc-footer">
-                <p>Documento de alcance funcional para validacion.<br>Su objetivo es confirmar que el contenido refleja correctamente las necesidades de Signature Garage.</p>
+                <p>Propuesta de desarrollo &mdash; Signature Garage<br>Documento confidencial para uso exclusivo de las partes involucradas.</p>
             </div>
 
         </main>
