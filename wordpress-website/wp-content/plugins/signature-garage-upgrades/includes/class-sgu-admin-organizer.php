@@ -5,7 +5,7 @@ class SGU_Admin_Organizer {
 
     private static $sections = [
         'vehiculos' => [
-            'label' => 'Vehicles',
+            'label' => 'Vehículos',
             'icon'  => 'dashicons-car',
             'items' => [
                 'menu-posts',           // Autos
@@ -13,7 +13,7 @@ class SGU_Admin_Organizer {
             ],
         ],
         'contenido' => [
-            'label' => 'Content',
+            'label' => 'Contenido',
             'icon'  => 'dashicons-edit-page',
             'items' => [
                 'menu-pages',    // Páginas
@@ -33,7 +33,7 @@ class SGU_Admin_Organizer {
             ],
         ],
         'configuracion' => [
-            'label' => 'Settings',
+            'label' => 'Configuración',
             'icon'  => 'dashicons-admin-settings',
             'items' => [
                 'toplevel_page_signaturecar-general-option',             // Theme Options
@@ -43,7 +43,7 @@ class SGU_Admin_Organizer {
             ],
         ],
         'administracion' => [
-            'label' => 'Admin',
+            'label' => 'Administración',
             'icon'  => 'dashicons-admin-tools',
             'items' => [
                 'menu-plugins',                        // Plugins
@@ -59,8 +59,48 @@ class SGU_Admin_Organizer {
 
     public static function init() {
         add_action('admin_menu', [__CLASS__, 'reorganize_menu'], 9999);
+        add_action('admin_menu', [__CLASS__, 'add_slider_submenu']);
         add_action('admin_head', [__CLASS__, 'inject_styles']);
         add_action('admin_footer', [__CLASS__, 'inject_scripts']);
+        add_action('admin_head', [__CLASS__, 'replace_admin_logo']);
+        add_action('admin_menu', [__CLASS__, 'rename_dashboard'], 9999);
+    }
+
+    public static function add_slider_submenu() {
+        // Add "Slider Manager" link under Autos (Posts)
+        add_submenu_page(
+            'edit.php',
+            'Slider Manager',
+            'Slider del Hero',
+            'manage_options',
+            'admin.php?page=sgu-dashboard&tab=slider-manager'
+        );
+    }
+
+    public static function rename_dashboard() {
+        global $menu;
+        foreach ($menu as &$item) {
+            if (isset($item[2]) && $item[2] === 'index.php') {
+                $item[0] = 'Inicio';
+                break;
+            }
+        }
+    }
+
+    public static function replace_admin_logo() {
+        $logo_url = get_template_directory_uri() . '/assets/img/logo.png';
+        ?>
+        <style id="sgu-admin-logo">
+            #wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon:before {
+                content: '' !important;
+                background: url('<?php echo esc_url($logo_url); ?>') no-repeat center center;
+                background-size: contain;
+                width: 20px;
+                height: 20px;
+                display: inline-block;
+            }
+        </style>
+        <?php
     }
 
     public static function reorganize_menu() {
@@ -92,18 +132,22 @@ class SGU_Admin_Organizer {
                 font-weight: 600;
                 text-transform: uppercase;
                 letter-spacing: 0.8px;
-                color: rgba(255,255,255,0.45);
+                color: #ffffff;
                 flex: 1;
             }
             #adminmenu .sgu-section-header .sgu-section-icon {
                 font-size: 14px;
                 width: 20px;
-                color: rgba(255,255,255,0.35);
                 margin-right: 6px;
             }
+            #adminmenu .sgu-section-header[data-section="vehiculos"] .sgu-section-icon { color: #4fc3f7; }
+            #adminmenu .sgu-section-header[data-section="contenido"] .sgu-section-icon { color: #81c784; }
+            #adminmenu .sgu-section-header[data-section="marketing"] .sgu-section-icon { color: #ffb74d; }
+            #adminmenu .sgu-section-header[data-section="configuracion"] .sgu-section-icon { color: #ba68c8; }
+            #adminmenu .sgu-section-header[data-section="administracion"] .sgu-section-icon { color: #e57373; }
             #adminmenu .sgu-section-header .sgu-section-toggle {
                 font-size: 12px;
-                color: rgba(255,255,255,0.3);
+                color: rgba(255,255,255,0.6);
                 transition: transform 0.2s;
             }
             #adminmenu .sgu-section-header.collapsed .sgu-section-toggle {
@@ -111,6 +155,28 @@ class SGU_Admin_Organizer {
             }
             #adminmenu .sgu-section-group.collapsed {
                 display: none;
+            }
+
+            /* Active section: left accent bar + subtle background */
+            #adminmenu .sgu-section-header:not(.collapsed) {
+                background: rgba(255,255,255,0.04);
+                border-left: 3px solid transparent;
+                padding-left: 9px;
+            }
+            #adminmenu .sgu-section-header.collapsed {
+                border-left: 3px solid transparent;
+                padding-left: 9px;
+            }
+            #adminmenu .sgu-section-header[data-section="vehiculos"]:not(.collapsed) { border-left-color: #4fc3f7; }
+            #adminmenu .sgu-section-header[data-section="contenido"]:not(.collapsed) { border-left-color: #81c784; }
+            #adminmenu .sgu-section-header[data-section="marketing"]:not(.collapsed) { border-left-color: #ffb74d; }
+            #adminmenu .sgu-section-header[data-section="configuracion"]:not(.collapsed) { border-left-color: #ba68c8; }
+            #adminmenu .sgu-section-header[data-section="administracion"]:not(.collapsed) { border-left-color: #e57373; }
+
+            /* Items inside open section get subtle left border too */
+            #adminmenu li[data-sgu-section]:not([style*="display: none"]) {
+                border-left: 3px solid rgba(255,255,255,0.06);
+                padding-left: 0;
             }
 
             /* Hide default WP separators — we use our own */
@@ -156,7 +222,7 @@ class SGU_Admin_Organizer {
 
             /* Dashicons in sidebar */
             #adminmenu div.wp-menu-image:before {
-                color: rgba(255,255,255,0.5);
+                color: rgba(255,255,255,0.75);
             }
             #adminmenu li.current div.wp-menu-image:before,
             #adminmenu li.wp-has-current-submenu div.wp-menu-image:before,

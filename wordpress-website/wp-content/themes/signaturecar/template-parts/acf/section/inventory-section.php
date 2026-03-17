@@ -17,7 +17,9 @@ if ( has_post_thumbnail() ) {
     $thumbnail_url = get_the_post_thumbnail_url( $post->ID, 'full' );
 ?>
     <a href="<?php the_permalink(); ?>" class="post-thumbnail-link" style="background-image: url('<?php echo esc_url( $thumbnail_url ); ?>');">
-        <!-- Optional content inside the link -->
+        <?php if ( get_field('no_residentes') ) : ?>
+            <span class="sgu-nores-badge">&#x1F1FA;&#x1F1F8; NO RESIDENTES</span>
+        <?php endif; ?>
     </a>
 <?php
 }
@@ -67,7 +69,9 @@ if ( has_post_thumbnail() ) {
     $thumbnail_url = get_the_post_thumbnail_url( $post->ID, 'full' );
 ?>
     <a href="<?php the_permalink(); ?>" class="post-thumbnail-link" style="background-image: url('<?php echo esc_url( $thumbnail_url ); ?>');">
-        <!-- Optional content inside the link -->
+        <?php if ( get_field('no_residentes') ) : ?>
+            <span class="sgu-nores-badge">&#x1F1FA;&#x1F1F8; NO RESIDENTES</span>
+        <?php endif; ?>
     </a>
 <?php
 }

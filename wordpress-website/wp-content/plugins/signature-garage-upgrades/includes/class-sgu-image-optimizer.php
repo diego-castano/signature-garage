@@ -228,6 +228,6 @@ class SGU_Image_Optimizer {
     }
 
     private static function get_webp_path($file_path) {
-        return preg_replace('/\.(jpe?g|png|gif)$/i', '.webp', $file_path);
+        return $file_path . '.webp';
     }
 }

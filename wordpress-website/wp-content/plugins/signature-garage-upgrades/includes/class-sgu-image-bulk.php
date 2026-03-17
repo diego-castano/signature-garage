@@ -8,6 +8,7 @@ class SGU_Image_Bulk {
         add_action('wp_ajax_sgu_optimize_single', [__CLASS__, 'optimize_single']);
         add_action('wp_ajax_sgu_get_stats', [__CLASS__, 'get_stats']);
         add_action('wp_ajax_sgu_save_settings', [__CLASS__, 'save_settings']);
+        add_action('wp_ajax_sgu_regenerate_webp_batch', [__CLASS__, 'regenerate_webp_batch']);
     }
 
     public static function scan_unoptimized() {
@@ -132,6 +133,73 @@ class SGU_Image_Bulk {
             'last_bulk_run'       => $global['last_bulk_run'] ?? 'Never',
             'gd_available'        => SGU_Image_Optimizer::has_gd(),
             'webp_available'      => SGU_Image_Optimizer::has_webp_support(),
+        ]);
+    }
+
+    public static function regenerate_webp_batch() {
+        check_ajax_referer('sgu_optimizer_nonce', 'nonce');
+        if (!current_user_can('manage_options')) wp_send_json_error('Unauthorized');
+
+        $offset = absint($_POST['offset'] ?? 0);
+        $batch_size = 5;
+
+        // Get optimized images
+        $ids = get_posts([
+            'post_type'      => 'attachment',
+            'post_mime_type' => ['image/jpeg', 'image/png', 'image/gif'],
+            'posts_per_page' => $batch_size,
+            'offset'         => $offset,
+            'fields'         => 'ids',
+            'meta_query'     => [
+                ['key' => '_sgu_optimized', 'value' => '1'],
+            ],
+        ]);
+
+        if (empty($ids)) {
+            wp_send_json_success(['done' => true, 'processed' => 0]);
+        }
+
+        $processed = 0;
+        $webp_created = 0;
+
+        foreach ($ids as $id) {
+            $file = get_attached_file($id);
+            if (!$file || !file_exists($file)) continue;
+
+            $metadata = wp_get_attachment_metadata($id);
+
+            // Delete old-style WebP (extension replaced, e.g. image.webp)
+            $old_webp = preg_replace('/\.(jpe?g|png|gif)$/i', '.webp', $file);
+            if (file_exists($old_webp)) @unlink($old_webp);
+
+            // Create new-style WebP (extension appended, e.g. image.jpg.webp)
+            $result = SGU_Image_Optimizer::create_webp($file);
+            if ($result) $webp_created++;
+
+            // Same for thumbnails
+            if (!empty($metadata['sizes'])) {
+                $base_dir = trailingslashit(dirname($file));
+                foreach ($metadata['sizes'] as $size_data) {
+                    $thumb = $base_dir . $size_data['file'];
+                    if (!file_exists($thumb)) continue;
+
+                    // Delete old-style thumb WebP
+                    $old_thumb_webp = preg_replace('/\.(jpe?g|png|gif)$/i', '.webp', $thumb);
+                    if (file_exists($old_thumb_webp)) @unlink($old_thumb_webp);
+
+                    // Create new-style thumb WebP
+                    SGU_Image_Optimizer::create_webp($thumb);
+                }
+            }
+
+            $processed++;
+        }
+
+        wp_send_json_success([
+            'done'         => count($ids) < $batch_size,
+            'processed'    => $processed,
+            'webp_created' => $webp_created,
+            'next_offset'  => $offset + $batch_size,
         ]);
     }
 

@@ -8,6 +8,7 @@ class SGU_Admin {
 
     public static function init() {
         self::register_tab('image-optimizer', 'Image Optimizer', SGU_PLUGIN_DIR . 'admin/views/tab-image-optimizer.php');
+        self::register_tab('slider-manager', 'Slider Manager', SGU_PLUGIN_DIR . 'admin/views/tab-slider-manager.php');
         add_action('admin_menu', [__CLASS__, 'add_menu']);
         add_action('admin_enqueue_scripts', [__CLASS__, 'enqueue_assets']);
         add_action('admin_init', [__CLASS__, 'register_settings']);
@@ -53,6 +54,27 @@ class SGU_Admin {
         wp_localize_script('sgu-bulk-optimizer', 'sguOptimizer', [
             'ajaxurl' => admin_url('admin-ajax.php'),
             'nonce'   => wp_create_nonce('sgu_optimizer_nonce'),
+        ]);
+
+        // Slider Manager assets
+        wp_enqueue_style(
+            'sgu-slider-manager',
+            SGU_PLUGIN_URL . 'admin/css/sgu-slider-manager.css',
+            [],
+            SGU_VERSION
+        );
+
+        wp_enqueue_script(
+            'sgu-slider-manager',
+            SGU_PLUGIN_URL . 'admin/js/sgu-slider-manager.js',
+            [],
+            SGU_VERSION,
+            true
+        );
+
+        wp_localize_script('sgu-slider-manager', 'sguSlider', [
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('sgu_slider_nonce'),
         ]);
     }
 

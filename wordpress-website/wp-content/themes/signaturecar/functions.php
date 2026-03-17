@@ -521,7 +521,11 @@ function filter_posts() {
                 <div class="box box-style-1">
                     <span class="title text-center d-block font_gillsans"><?php the_title(); ?></span>
                     <?php if ( has_post_thumbnail() ) : ?>
-                        <a href="<?php the_permalink(); ?>" class="post-thumbnail-link alt" style="background-image: url('<?php echo esc_url( get_the_post_thumbnail_url( $post->ID, 'full' ) ); ?>');"></a>
+                        <a href="<?php the_permalink(); ?>" class="post-thumbnail-link alt" style="background-image: url('<?php echo esc_url( get_the_post_thumbnail_url( $post->ID, 'full' ) ); ?>');">
+                            <?php if ( get_field('no_residentes') ) : ?>
+                                <span class="sgu-nores-badge">&#x1F1FA;&#x1F1F8; NO RESIDENTES</span>
+                            <?php endif; ?>
+                        </a>
                     <?php endif; ?>
                     <div class="details">
                         <?php if( $informations ) : ?>

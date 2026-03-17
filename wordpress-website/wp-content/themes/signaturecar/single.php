@@ -45,6 +45,9 @@ if ( function_exists('yoast_breadcrumb') ) {
                         </ul>
                     </div>
                     <div class="content-text text-md-end text-center">
+						<?php if ( get_field('no_residentes') ) : ?>
+							<span class="sgu-nores-badge-single">&#x1F1FA;&#x1F1F8; NO RESIDENTES</span>
+						<?php endif; ?>
 						<?php if( 'v1' == get_field( 'sold' ) ): ?>
 							<h2 class="status  h2 font_gillsans color_white font_medium">VENDIDO</h2>
 						<?php else: ?>
